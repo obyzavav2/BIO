@@ -488,7 +488,18 @@
             }, { threshold: 0.1 });
             document.querySelectorAll('.card, .service-item, .timeline-step, .stat-item').forEach(el => observer.observe(el));
 
-
+            const cursor = document.getElementById('cursor');
+            if (cursor && window.matchMedia('(min-width: 881px)').matches) {
+                document.addEventListener('mousemove', (e) => {
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                });
+                document.querySelectorAll('a, button, .btn, .badge, .service-item, .card').forEach(el => {
+                    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+                });
+            }
+            
             const canvas = document.getElementById('particleCanvas');
             if (canvas) {
                 const ctx = canvas.getContext('2d');
