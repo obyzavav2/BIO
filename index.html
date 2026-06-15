@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Obyzava · Портфолио</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #050505;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            cursor: none;
+            overflow-x: hidden;
+        }
+        @media (max-width: 880px) {
+            body {
+                cursor: auto;
+            }
+        }
+        canvas#particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease, border-color 0.2s;
+            mix-blend-mode: difference;
+            transform: translate(-50%, -50%);
+        }
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(1.8);
+            border-color: #aaaaaa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        header {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #2a2a2a;
+            position: sticky;
+            top: 0;
+            background: rgba(5,5,5,0.85);
+            backdrop-filter: blur(15px);
+            z-index: 50;
+        }
+        .header-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-family: 'Fira Code', monospace;
+            font-weight: 700;
+            font-size: 1.7rem;
+            color: #ffffff;
+            text-decoration: none;
+            border: 1px solid #3a3a3a;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            transition: 0.25s;
+            letter-spacing: -0.5px;
+        }
+        .logo:hover {
+            background: #1a1a1a;
+            border-color: #ffffff;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+        }
+        nav a {
+            text-decoration: none;
+            color: #999;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            background: transparent;
+        }
+        nav a:hover, nav a.active {
+            background: #1c1c1c;
+            color: #ffffff;
+            box-shadow: 0 0 0 1px #444;
+        }
+        main {
+            padding: 2.5rem 0 4rem;
+            min-height: 70vh;
+        }
+        .page {
+            display: none;
+            animation: fadeSlide 0.5s ease;
+        }
+        .page.active-page {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        h1, h2, h3, .mono {
+            font-family: 'Fira Code', monospace;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 3.2rem;
+            margin-bottom: 0.3rem;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+        h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.8rem;
+            color: #dddddd;
+            border-bottom: 1px solid #2e2e2e;
+            padding-bottom: 0.4rem;
+            display: inline-block;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #555;
+            filter: grayscale(100%) brightness(1.1);
+            transition: 0.4s;
+            margin-bottom: 1rem;
+        }
+        .avatar:hover {
+            filter: grayscale(30%) brightness(1.3);
+            border-color: #ffffff;
+        }
+        .card {
+            background: #0d0d0d;
+            border: 1px solid #262626;
+            border-radius: 24px;
+            padding: 1.8rem;
+            transition: 0.25s;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.2s, background 0.2s;
+        }
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .card:hover {
+            border-color: #5a5a5a;
+            background: #141414;
+            transform: translateY(-4px);
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s;
+            border: 1px solid #3a3a3a;
+            color: #d0d0d0;
+            background: #111;
+            letter-spacing: 0.3px;
+        }
+        .btn:hover {
+            background: #ffffff;
+            color: #050505;
+            border-color: #ffffff;
+        }
+        .badge {
+            background: #141414;
+            border: 1px solid #333;
+            padding: 0.4rem 1.1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #bbb;
+            transition: 0.2s;
+            display: inline-block;
+        }
+        .badge:hover {
+            background: #2a2a2a;
+            color: white;
+        }
+        .stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .stat-item {
+            text-align: center;
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 1.5rem 2rem;
+        }
+        .stat-number {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+        .service-item {
+            background: #0d0d0d;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: 0.2s;
+        }
+        .service-item:hover {
+            border-color: #666;
+            background: #141414;
+        }
+        .timeline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+        .timeline-step {
+            flex: 1;
+            min-width: 120px;
+            background: #0d0d0d;
+            border: 1px solid #2e2e2e;
+            border-radius: 20px;
+            padding: 1.4rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .price-tag {
+            font-family: 'Fira Code', monospace;
+            background: #111;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #333;
+        }
+        footer {
+            border-top: 1px solid #222;
+            padding: 2rem 0;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 880px) {
+            h1 { font-size: 2.3rem; }
+            .cursor { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div class="cursor" id="cursor"></div>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo" data-nav="home">Obyzava</a>
+            <nav>
+                <ul>
+                    <li><a href="#" data-nav="home" class="active">Главная</a></li>
+                    <li><a href="#" data-nav="about">Обо мне</a></li>
+                    <li><a href="#" data-nav="services">Услуги</a></li>
+                    <li><a href="#" data-nav="portfolio">Портфолио</a></li>
+                    <li><a href="#" data-nav="contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="home" class="page active-page">
+            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 2rem 0;">
+                <img src="https://avatars.githubusercontent.com/u/212697059?v=4" alt="Obyzava" class="avatar">
+                <h1>👨‍💻 Obyzava</h1>
+                <p style="font-size: 1.6rem; color: #aaa; font-family: 'Fira Code', monospace; margin-bottom: 1.5rem;">Digital Creator</p>
+                <div id="typing-text" style="font-family: 'Fira Code', monospace; font-size: 1.4rem; margin: 0.5rem 0 2rem; color: #ccc; min-height: 2rem;"></div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;">
+                    <a href="https://t.me/Obyzava_V4" target="_blank" class="btn">💬 Telegram</a>
+                    <a href="https://github.com/obyzavav2" target="_blank" class="btn">🐙 GitHub</a>
+                    <a href="https://www.youtube.com/@Obyzava" target="_blank" class="btn">🎬 YouTube</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="about" class="page">
+            <h2>🌟 Обо мне</h2>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; align-items: center;">
+                <div style="flex:2; min-width:250px;">
+                    <p>Привет! Я Константин, также известный как <strong>Obyzava</strong>. Разрабатываю ботов, сайты и цифровые решения. Начал кодить в 13 лет, а первый сайт сверстал за одну ночь.</p>
+                    <div class="stats">
+                        <div class="stat-item"><span class="stat-number">50+</span><br>проектов</div>
+                        <div class="stat-item"><span class="stat-number">3+</span><br>года опыта</div>
+                        <div class="stat-item"><span class="stat-number">100%</span><br>довольных клиентов</div>
+                    </div>
+                </div>
+                <div style="flex:1; min-width:150px;">
+                    <img src="https://media.giphy.com/media/qgQUggAC3Pfv687qPC/giphy.gif" alt="coding" style="max-width:200px; border-radius: 24px; border:1px solid #333; filter: grayscale(100%) brightness(1.1);" loading="lazy">
+                </div>
+            </div>
+            <h3 style="margin-top: 2rem;">📋 Мой подход</h3>
+            <div class="timeline">
+                <div class="timeline-step">🔍 Анализ</div>
+                <div class="timeline-step">📐 Проектирование</div>
+                <div class="timeline-step">⚙️ Разработка</div>
+                <div class="timeline-step">🧪 Тестирование</div>
+                <div class="timeline-step">🤝 Поддержка</div>
+            </div>
+        </div>
+
+        <div id="services" class="page">
+            <h2>🛠️ Что я делаю</h2>
+            <div class="services-list">
+                <div class="service-item">🤖 Боты (Telegram, Discord, автоматизации, игровые системы)</div>
+                <div class="service-item">🌐 Сайты (лендинги, визитки, интернет-магазины)</div>
+                <div class="service-item">🎨 Оформление (кастомные темы, фирменный стиль)</div>
+                <div class="service-item">🧩 Код и помощь (пишу код, изучаю новые технологии)</div>
+                <div class="service-item">🚀 Оптимизация (исправления, рефакторинг, стабилизация)</div>
+                <div class="service-item">📊 Игровые системы (экономика, предметы, рейтинги)</div>
+                <div class="service-item">🔗 Интеграции (подключение сервисов, автоматизация)</div>
+                <div class="service-item">📱 Удобство (интерфейсы, понятные новичкам)</div>
+            </div>
+            <div style="margin-top: 2.5rem;">
+                <h3>💰 Цены</h3>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <span class="price-tag">🤖 Телеграм бот — от 500₽</span>
+                    <span class="price-tag">🌐 Лендинг — договорная</span>
+                    <span class="price-tag">🛒 Интернет-магазин — договорная</span>
+                </div>
+            </div>
+            <div style="margin-top: 2rem;">
+                <h3>🧰 Технические навыки</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem;">
+                    <span class="badge">Python / PyTelegramBotAPI</span>
+                    <span class="badge">JavaScript / HTML / CSS</span>
+                    <span class="badge">Node.js / Express</span>
+                    <span class="badge">Git / GitHub</span>
+                    <span class="badge">SQL / Базы данных</span>
+                    <span class="badge">UI/UX Дизайн</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="portfolio" class="page">
+            <h2>📂 Мои работы</h2>
+            <div class="card-grid" id="projectGrid"></div>
+            <p style="margin-top: 1.5rem; color: #777;">⚡ Больше работ в GitHub - </p>
+        </div>
+
+        <div id="contact" class="page">
+            <h2>📞 Связаться со мной</h2>
+            <div style="background: #0d0d0d; border:1px solid #2a2a2a; border-radius: 24px; padding: 2rem;">
+                <p style="margin-bottom: 1rem;">📬 Telegram: <a href="https://t.me/Obyzava_V4" target="_blank" style="color:#ddd;">@Obyzava_V4</a> (основной)</p>
+                <p style="margin-bottom: 1rem;">📧 Email: <a href="mailto:Obyzavav2@gmail.com" style="color:#ddd;">Obyzavav2@gmail.com</a></p>
+                <p style="margin-bottom: 1rem;">🐙 GitHub: <a href="https://github.com/obyzavav2" target="_blank" style="color:#ddd;">obyzavav2</a></p>
+                <p style="margin-bottom: 1rem;">🎬 YouTube: <a href="https://www.youtube.com/@Obyzava" target="_blank" style="color:#ddd;">@Obyzava</a></p>
+                <p style="margin-bottom: 1rem;">🔴 Reddit: <a href="https://www.reddit.com/user/Obyzava/" target="_blank" style="color:#ddd;">u/Obyzava</a></p>
+                <p style="margin-bottom: 1rem;">𝕏 X (Twitter): <a href="https://x.com/Obyzava" target="_blank" style="color:#ddd;">@Obyzava</a></p>
+                <a href="https://www.buymeacoffee.com/obyzavav2" target="_blank" class="btn" style="margin-top:1rem;">☕ Поддержать проект (Пока неработает)</a></p></a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 Obyzava — Константин · Готов к новым вызовам и проектам</p>
+            <p style="color:#444;">Разработка ботов, сайтов и цифровых решений</p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('nav a');
+            window.navigateTo = (pageId) => {
+                pages.forEach(p => p.classList.remove('active-page'));
+                document.getElementById(pageId).classList.add('active-page');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.nav === pageId) link.classList.add('active');
+                });
+            };
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateTo(link.dataset.nav);
+                });
+            });
+
+            const typingEl = document.getElementById('typing-text');
+            if (typingEl) {
+                const phrases = ["Obyzava | Digital Creator", "Контент-мейкер", "Разработчик", "Аналитик", "Создаю будущее в коде"];
+                let phraseIdx = 0, charIdx = 0, current = '', deleting = false;
+                function type() {
+                    const full = phrases[phraseIdx];
+                    if (deleting) {
+                        current = full.substring(0, charIdx - 1);
+                        charIdx--;
+                    } else {
+                        current = full.substring(0, charIdx + 1);
+                        charIdx++;
+                    }
+                    typingEl.textContent = current;
+                    if (!deleting && charIdx === full.length) {
+                        setTimeout(() => { deleting = true; type(); }, 2000);
+                        return;
+                    } else if (deleting && charIdx === 0) {
+                        deleting = false;
+                        phraseIdx = (phraseIdx + 1) % phrases.length;
+                        setTimeout(type, 400);
+                        return;
+                    }
+                    setTimeout(type, deleting ? 40 : 80);
+                }
+                type();
+            }
+
+            const projects = [
+                {name:"Obyzava V2", url:"https://obyzavav2.github.io/ObyzavaV2"},
+                {name:"Portfolio Obyzava", url:"https://obyzavav2.github.io/Portfolio-Obyzava"},
+                {name:"Dottor1k", url:"https://obyzavav2.github.io/dottor1k"},
+                {name:"Mr. Xamctep", url:"https://obyzavav2.github.io/mr.xamctep"},
+                {name:"Sbl1x", url:"https://obyzavav2.github.io/sbl1x1201"},
+                {name:"Dessert", url:"https://obyzavav2.github.io/dessert"},
+                {name:"Musca Ziv", url:"https://obyzavav2.github.io/MuscaZiv"},
+                {name:"Poof White", url:"https://obyzavav2.github.io/PoofWhiteWhite"},
+                {name:"Hebe3ehne", url:"https://obyzavav2.github.io/HEBE3EHNE.com"},
+                {name:"BioTG17", url:"https://obyzavav2.github.io/biotg17"},
+                {name:"Tor Themes", url:"https://obyzavav2.github.io/Tor_themes"},
+                {name:"4ip0tka", url:"https://obyzavav2.github.io/4ip0tka"},
+                {name:"KS ROB", url:"https://obyzavav2.github.io/KS_ROB"},
+                {name:"IP DED", url:"https://obyzavav2.github.io/IP_DED_Obyzava"},
+                {name:"Mercy FF", url:"https://obyzavav2.github.io/m3rcy_ff"},
+                {name:"Obyzava", url:"https://obyzava.github.io/Obyzava"}
+            ];
+            const grid = document.getElementById('projectGrid');
+            if (grid) {
+                projects.forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `<h3>${p.name}</h3><a href="${p.url}" target="_blank" class="btn" style="margin-top:0.8rem;">Открыть</a>`;
+                    grid.appendChild(card);
+                });
+            }
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.card, .service-item, .timeline-step, .stat-item').forEach(el => observer.observe(el));
+
+
+            const canvas = document.getElementById('particleCanvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                const particles = [];
+                const particleCount = 70;
+                function resize() {
+                    width = window.innerWidth;
+                    height = window.innerHeight;
+                    canvas.width = width;
+                    canvas.height = height;
+                }
+                window.addEventListener('resize', resize);
+                resize();
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        vx: (Math.random() - 0.5) * 0.4,
+                        vy: (Math.random() - 0.5) * 0.4,
+                        size: Math.random() * 1.8 + 0.5
+                    });
+                }
+                function draw() {
+                    ctx.clearRect(0, 0, width, height);
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+                    particles.forEach(p => {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        if (p.x < 0) p.x = width;
+                        if (p.x > width) p.x = 0;
+                        if (p.y < 0) p.y = height;
+                        if (p.y > height) p.y = 0;
+                    });
+                    requestAnimationFrame(draw);
+                }
+                draw();
+            }
+        })();
+    </script>
+</body>
+</html>
