@@ -1,202 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obyzava — Digital Creator · Боты, сайты и цифровые решения</title>
+<meta name="description" content="Obyzava (Константин) — разработка Telegram- и Discord-ботов, сайтов, игровых систем и автоматизаций под ключ. Открыт к новым проектам и идеям.">
+<meta name="theme-color" content="#05050e">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%238b5cf6'/%3E%3Cstop offset='.5' stop-color='%2322d3ee'/%3E%3Cstop offset='1' stop-color='%23f472b6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='%2305050e'/%3E%3Ctext x='32' y='46' font-family='Arial,Helvetica,sans-serif' font-size='40' font-weight='800' text-anchor='middle' fill='url(%23g)'%3EO%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  :root {
-    --bg:#05050e; --text:#ece8ff; --muted:#a7a1c9; --stroke:rgba(255,255,255,.09);
-    --panel:rgba(255,255,255,.045); --violet:#8b5cf6; --cyan:#22d3ee; --pink:#f472b6;
-    --nav-bg:rgba(5,5,14,.6);
-    --blob1:rgba(139,92,246,.5); --blob2:rgba(34,211,238,.35); --blob3:rgba(244,114,182,.28);
-    --avatar-bg:#0b0b18; --typing:#cfc7ef; --text-strong:#ffffff;
-    --price-bg:#10101d; --card-hover:#18182c; --glyph:#ffffff;
-    --footer:#5b5580; --footer2:#3f3a63; --hairline:rgba(255,255,255,.08);
-    --cursor:rgba(255,255,255,.55); --cursor-soft:rgba(255,255,255,.3);
-    --wx:50vw; --wy:50vh;
-  }
-  html[data-theme="light"] {
-    --bg:#f4f1ff; --text:#262244; --muted:#6d6695; --stroke:rgba(30,20,80,.10);
-    --panel:rgba(255,255,255,.72); --nav-bg:rgba(255,255,255,.72);
-    --blob1:rgba(139,92,246,.16); --blob2:rgba(34,211,238,.13); --blob3:rgba(244,114,182,.11);
-    --avatar-bg:#ffffff; --typing:#6a5fc0; --text-strong:#1c1940;
-    --price-bg:#ffffff; --card-hover:#efeaff; --glyph:#7b6fd0;
-    --footer:#7a74a6; --footer2:#b0a9d0; --hairline:rgba(30,20,80,.12);
-    --cursor:rgba(30,20,80,.45); --cursor-soft:rgba(30,20,80,.25);
-  }
-  body { transition:background .4s ease, color .4s ease; }
-  html[data-theme="light"] .card, html[data-theme="light"] .stat, html[data-theme="light"] .step,
-  html[data-theme="light"] .project, html[data-theme="light"] .contact-card, html[data-theme="light"] .price-tag {
-    box-shadow:0 6px 26px rgba(80,60,180,.08);
-  }
-  html[data-theme="light"] #stars { filter:invert(1); opacity:.55; }
-  @media (prefers-reduced-motion: reduce) {
-    h1 { animation:none; }
-    .avatar-wrap { animation:none; }
-  }
+<link rel="preconnect" href="https://esm.sh">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Obyzava">
+<meta property="og:title" content="Obyzava — Digital Creator">
+<meta property="og:description" content="Разработка ботов, сайтов, игровых систем и автоматизаций. Telegram · GitHub · YouTube.">
+<meta property="og:url" content="https://obyzavav2.github.io/BIO/">
+<meta property="og:image" content="https://user.uploads.dev/file/d182704459ad57bb24792e6b7d377b9e.png">
+<meta property="og:image:width" content="768">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Obyzava — Digital Creator">
+<meta name="twitter:description" content="Разработка ботов, сайтов, игровых систем и автоматизаций.">
+<meta name="twitter:image" content="https://user.uploads.dev/file/d182704459ad57bb24792e6b7d377b9e.png">
+<script>!function(){try{"light"===localStorage.getItem("obyzava-theme")&&document.documentElement.setAttribute("data-theme","light")}catch(t){}}();</script>
+</head>
+<body>
 
-  .theme-btn { flex:none; width:42px; height:42px; border-radius:50%; border:1px solid var(--stroke);
-    background:var(--panel); color:var(--text); cursor:pointer; position:relative; transition:border-color .3s, box-shadow .3s, background .4s; }
-  .theme-btn:hover { border-color:rgba(167,139,250,.7); box-shadow:0 0 20px rgba(139,92,246,.35); }
-  .theme-btn svg { position:absolute; top:50%; left:50%; width:19px; height:19px;
-    transform:translate(-50%,-50%); transition:transform .7s cubic-bezier(.6,-.25,.3,1.4), opacity .4s; }
-  .theme-btn .sun { opacity:0; transform:translate(-50%,-50%) rotate(-120deg) scale(.3); }
-  .theme-btn .moon { opacity:1; transform:translate(-50%,-50%) rotate(0) scale(1); }
-  html[data-theme="light"] .theme-btn .sun { opacity:1; transform:translate(-50%,-50%) rotate(0) scale(1); }
-  html[data-theme="light"] .theme-btn .moon { opacity:0; transform:translate(-50%,-50%) rotate(120deg) scale(.3); }
-
-  .wipe { position:fixed; inset:0; z-index:200; pointer-events:none; background:var(--bg);
-    clip-path:circle(0 at var(--wx) var(--wy)); will-change:clip-path; }
-  .wipe.on { animation:wipeOn .5s cubic-bezier(.7,0,.3,1) forwards; }
-  .wipe.out { animation:wipeOut .55s cubic-bezier(.7,0,.3,1) forwards; }
-  @keyframes wipeOn { to { clip-path:circle(150% at var(--wx) var(--wy)); } }
-  @keyframes wipeOut { from { clip-path:circle(150% at var(--wx) var(--wy)); } to { clip-path:circle(0 at var(--wx) var(--wy)); } }
-  html { scroll-behavior:smooth; }
-  body {
-    font-family:'Fira Code', monospace; color:var(--text); background:var(--bg);
-    text-align:left; overflow-x:hidden;
-  }
-  ::selection { background:rgba(139,92,246,.45); color:#fff; }
-  ::-webkit-scrollbar { width:10px; }
-  ::-webkit-scrollbar-track { background:var(--bg); }
-  ::-webkit-scrollbar-thumb { background:linear-gradient(var(--violet),var(--cyan)); border-radius:8px; border:2px solid var(--bg); }
-
-  #progress { position:fixed; top:0; left:0; height:3px; width:0; z-index:40; background:linear-gradient(90deg,var(--violet),var(--cyan),var(--pink)); }
-  #stars { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; }
-  #bg3d { position:fixed; inset:0; width:100%; height:100%; z-index:0; pointer-events:none; display:none; }
-  html.bg3d-ok #stars { display:none; }
-  html.bg3d-ok #bg3d { display:block; }
-  .about-row { display:grid; grid-template-columns:1.25fr 1fr; gap:2.2rem; align-items:center; }
-  @media (max-width:860px) { .about-row { grid-template-columns:1fr; } }
-  .blob { position:fixed; z-index:0; border-radius:50%; filter:blur(90px); opacity:.5; pointer-events:none; }
-  .blob.b1 { width:42vw; height:42vw; background:radial-gradient(circle,var(--blob1),transparent 70%); top:-12vw; left:-10vw; }
-  .blob.b2 { width:36vw; height:36vw; background:radial-gradient(circle,var(--blob2),transparent 70%); bottom:-8vw; right:-8vw; opacity:.35; }
-  .blob.b3 { width:30vw; height:30vw; background:radial-gradient(circle,var(--blob3),transparent 70%); top:32vh; left:58vw; opacity:.28; }
-
-  nav {
-    position:fixed; top:0; left:0; right:0; z-index:30;
-    display:flex; justify-content:space-between; align-items:center;
-    padding:.85rem 1.6rem; background:var(--nav-bg); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--stroke);
-  }
-  .logo { font-family:'Unbounded'; font-weight:800; font-size:1.1rem; text-decoration:none; letter-spacing:.5px;
-    background:linear-gradient(90deg,#a78bfa,var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .nav-links { display:flex; gap:1.5rem; list-style:none; }
-  .nav-links a { color:var(--muted); text-decoration:none; font-size:.88rem; position:relative; transition:color .2s; }
-  .nav-links a:hover, .nav-links a.active { color:var(--text-strong); }
-  .nav-links a.active::after { content:''; position:absolute; left:0; bottom:-6px; height:2px; width:100%; border-radius:2px; background:linear-gradient(90deg,var(--violet),var(--cyan)); }
-  @media (max-width:760px) { .nav-links { display:none; } }
-
-  main { position:relative; z-index:5; }
-  .inner { max-width:1100px; margin:0 auto; padding:0 1.5rem; }
-  section { padding:5.5rem 0; }
-
-  .grad { background:linear-gradient(90deg,#a78bfa,var(--cyan),var(--pink)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  h2.sec { font-family:'Unbounded'; font-size:clamp(1.5rem,4vw,2.2rem); margin-bottom:.6rem; font-weight:800; }
-  .sec-num { display:block; font-family:'Fira Code'; font-size:.8rem; color:var(--cyan); opacity:.85; letter-spacing:2px; margin-bottom:.5rem; }
-  .sec-sub { color:var(--muted); margin-bottom:2.6rem; font-size:.92rem; }
-
-  #home { min-height:100svh; display:flex; align-items:center; position:relative; padding-top:4.5rem; }
-  #home .inner { display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; width:100%; }
-  @media (max-width:860px) { #home .inner { grid-template-columns:1fr; } }
-
-  .avatar-wrap { --a:0deg; width:104px; height:104px; border-radius:50%; padding:3px; margin-bottom:1.5rem;
-    background:conic-gradient(from var(--a),#8b5cf6,#22d3ee,#f472b6,#8b5cf6); animation:hue 6s linear infinite;
-    box-shadow:0 0 50px rgba(139,92,246,.4); }
-  @property --a { syntax:'<angle>'; initial-value:0deg; inherits:false; }
-  @keyframes hue { to { --a:360deg; } }
-  .avatar-wrap img { width:100%; height:100%; border-radius:50%; object-fit:cover; display:block; background:var(--avatar-bg); }
-  h1 { font-family:'Unbounded'; font-weight:800; font-size:clamp(2.2rem,5.5vw,3.6rem); line-height:1.08; letter-spacing:1px;
-    background:linear-gradient(115deg,#a78bfa,#22d3ee,#f472b6,#a78bfa,#22d3ee);
-    background-size:300% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
-    animation:shimmer 7s linear infinite; }
-  @keyframes shimmer { to { background-position:300% 0; } }
-  .role { margin-top:.7rem; font-size:clamp(1rem,2.4vw,1.25rem); color:var(--muted); }
-  .typing { margin-top:1.2rem; font-size:1rem; color:var(--typing); min-height:1.6rem; }
-  .typing::after { content:'▍'; color:var(--cyan); animation:blink 1.05s step-end infinite; }
-  @keyframes blink { 50% { opacity:0; } }
-  .cta { margin-top:2rem; display:flex; gap:.9rem; flex-wrap:wrap; }
-  .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.75rem 1.5rem; border-radius:999px;
-    border:1px solid var(--stroke); background:rgba(255,255,255,.05); color:var(--text); text-decoration:none;
-    font-size:.92rem; font-family:'Fira Code'; transition:.25s; backdrop-filter:blur(6px); }
-  .btn:hover { border-color:rgba(167,139,250,.7); box-shadow:0 0 26px rgba(139,92,246,.35); transform:translateY(-2px); color:var(--text-strong); }
-  .btn.solid { background:linear-gradient(90deg,var(--violet),#6d28d9); border-color:transparent; font-weight:600; }
-  .btn.solid:hover { box-shadow:0 0 34px rgba(139,92,246,.55); }
-
-  .gem-col { position:relative; height:420px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  @media (max-width:860px) { .gem-col { height:340px; } }
-  .gem-canvas { position:absolute; inset:0; width:100%; height:100%; cursor:grab; touch-action:pan-y; border-radius:26px; }
-  .gem-canvas.dragging { cursor:grabbing; }
-  .gem-hint { position:absolute; bottom:6px; font-size:.72rem; color:var(--muted); opacity:.8; letter-spacing:1px; text-transform:uppercase; }
-
-  .text-p { color:var(--text); opacity:.93; line-height:1.8; font-size:.95rem; }
-  .text-p strong { color:var(--text-strong); }
-  .text-p + .text-p { margin-top:1rem; }
-
-  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2.4rem; }
-  @media (max-width:560px) { .stats { grid-template-columns:repeat(3,1fr); gap:.6rem; } }
-  .stat { background:var(--panel); border:1px solid var(--stroke); border-radius:18px; padding:1.4rem 1rem; text-align:center; transition:.3s; }
-  .stat:hover { border-color:rgba(167,139,250,.5); transform:translateY(-4px); }
-  .stat b { font-family:'Unbounded'; font-size:clamp(1.4rem,3.5vw,2rem); background:linear-gradient(90deg,#a78bfa,var(--cyan)); -webkit-background-clip:text; background-clip:text; color:transparent; }
-  .stat span { display:block; margin-top:.35rem; font-size:.78rem; color:var(--muted); }
-
-  .steps { display:grid; grid-template-columns:repeat(5,1fr); gap:.8rem; margin-top:2.2rem; }
-  @media (max-width:760px) { .steps { grid-template-columns:1fr 1fr; } }
-  .step { background:var(--panel); border:1px solid var(--stroke); border-radius:16px; padding:1.1rem .7rem; text-align:center; position:relative; transition:.3s; }
-  .step:hover { transform:translateY(-4px); border-color:rgba(34,211,238,.5); }
-  .step .n { font-size:.7rem; color:var(--cyan); letter-spacing:1px; }
-  .step p { margin-top:.45rem; font-size:.84rem; }
-
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.1rem; }
-  .card { background:var(--panel); border:1px solid var(--stroke); border-radius:18px; padding:1.5rem; position:relative; overflow:hidden; transition:.3s; }
-  .card:hover { transform:translateY(-5px); border-color:rgba(167,139,250,.5); box-shadow:0 14px 44px rgba(139,92,246,.16); }
-  .card .ico { font-size:1.8rem; transition:transform .35s cubic-bezier(.6,-.2,.3,1.4); }
-  .card:hover .ico { transform:scale(1.25) rotate(-8deg); }
-  .card h3 { font-family:'Unbounded'; font-weight:600; font-size:.98rem; margin:.7rem 0 .35rem; }
-  .card p { color:var(--muted); font-size:.82rem; line-height:1.6; }
-
-  .price-row { display:flex; gap:.9rem; flex-wrap:wrap; }
-  .price-tag { background:var(--price-bg); border:1px solid var(--stroke); padding:.6rem 1.2rem; border-radius:999px; font-size:.85rem; transition:.3s; }
-  .price-tag:hover { border-color:rgba(244,114,182,.6); box-shadow:0 0 20px rgba(244,114,182,.2); }
-
-  .badges { display:flex; flex-wrap:wrap; gap:.6rem; }
-  .badge { background:var(--panel); border:1px solid var(--stroke); padding:.5rem 1.1rem; border-radius:999px; font-size:.82rem; color:var(--text); opacity:.9; transition:.25s; }
-  .badge:hover { background:var(--card-hover); color:var(--text-strong); opacity:1; border-color:rgba(167,139,250,.5); }
-
-  .project-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(235px,1fr)); gap:1.1rem; }
-  .project { background:var(--panel); border:1px solid var(--stroke); border-radius:18px; padding:1.2rem 1.3rem; position:relative; overflow:hidden; transition:.3s; text-decoration:none; color:inherit; display:block; }
-  .project:hover { transform:translateY(-5px); border-color:rgba(167,139,250,.55); box-shadow:0 14px 44px rgba(139,92,246,.16); }
-  .project .strip { position:absolute; top:0; left:0; right:0; height:5px; }
-  .project .glyph { position:absolute; right:-6px; bottom:-22px; font-size:5rem; font-family:'Unbounded'; font-weight:800; opacity:.07; color:var(--glyph); }
-  .project h3 { font-size:.95rem; font-weight:600; font-family:'Unbounded'; }
-  .project span.link { display:inline-block; margin-top:.7rem; font-size:.78rem; color:var(--cyan); }
-
-  .contact-card { background:var(--panel); border:1px solid var(--stroke); border-radius:22px; padding:1.8rem 2rem; }
-  .contact-row { display:flex; align-items:center; gap:1rem; padding:.85rem 0; border-bottom:1px dashed var(--hairline); }
-  .contact-row:last-of-type { border-bottom:none; }
-  .contact-row .ico { width:42px; height:42px; flex:none; border-radius:12px; background:rgba(139,92,246,.13); display:flex; align-items:center; justify-content:center; font-size:1.15rem; }
-  .contact-row .lbl { font-size:.75rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; }
-  .contact-row a { color:var(--text); text-decoration:none; font-size:.92rem; transition:color .2s; }
-  .contact-row a:hover { color:var(--violet); }
-
-  footer { border-top:1px solid var(--hairline); padding:2.2rem 1.5rem; text-align:center; color:var(--footer); font-size:.85rem; position:relative; z-index:5; }
-  footer .f2 { color:var(--footer2); margin-top:.4rem; font-size:.78rem; }
-
-  .reveal { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
-  .reveal.visible { opacity:1; transform:none; }
-
-  .cursor { position:fixed; z-index:50; width:34px; height:34px; border:1.5px solid var(--cursor); border-radius:50%;
-    pointer-events:none; transform:translate(-50%,-50%); transition:width .18s,height .18s,background .18s,border-color .18s; display:none; }
-  .cursor.hover { width:54px; height:54px; background:rgba(139,92,246,.15); border-color:rgba(167,139,250,.8); }
-  @media (hover:hover) and (pointer:fine) { .cursor { display:block; } }
-
-  .scroll-dot { position:absolute; bottom:1.6rem; left:50%; transform:translateX(-50%); width:24px; height:38px; border:1.5px solid var(--cursor-soft); border-radius:14px; }
-  .scroll-dot::after { content:''; position:absolute; top:7px; left:50%; width:4px; height:8px; margin-left:-2px; border-radius:3px; background:var(--cyan); animation:scrollb 1.8s ease-in-out infinite; }
-  @keyframes scrollb { 0%{opacity:0; transform:translateY(0)} 30%{opacity:1} 100%{opacity:0; transform:translateY(12px)} }
-  @media (max-width:860px) { .scroll-dot { display:none; } }
-</style>
-<script>
-(function(){ try { if (localStorage.getItem('obyzava-theme') === 'light') document.documentElement.setAttribute('data-theme','light'); } catch(e){} })();
-</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}:root{--bg:#05050e;--text:#ece8ff;--muted:#a7a1c9;--stroke:rgba(255,255,255,.09);--panel:rgba(255,255,255,.045);--violet:#8b5cf6;--cyan:#22d3ee;--pink:#f472b6;--nav-bg:rgba(5,5,14,.6);--blob1:rgba(139,92,246,.5);--blob2:rgba(34,211,238,.35);--blob3:rgba(244,114,182,.28);--grid-line:rgba(255,255,255,.055);--avatar-bg:#0b0b18;--typing:#cfc7ef;--text-strong:#ffffff;--price-bg:#10101d;--card-hover:#18182c;--glyph:#ffffff;--footer:#5b5580;--footer2:#3f3a63;--hairline:rgba(255,255,255,.08);--cursor:rgba(255,255,255,.55);--cursor-soft:rgba(255,255,255,.3);--wx:50vw;--wy:50vh;}html[data-theme="light"]{--bg:#f4f1ff;--text:#262244;--muted:#6d6695;--stroke:rgba(30,20,80,.10);--panel:rgba(255,255,255,.72);--nav-bg:rgba(255,255,255,.72);--blob1:rgba(139,92,246,.16);--blob2:rgba(34,211,238,.13);--blob3:rgba(244,114,182,.11);--grid-line:rgba(30,20,80,.07);--avatar-bg:#ffffff;--typing:#6a5fc0;--text-strong:#1c1940;--price-bg:#ffffff;--card-hover:#efeaff;--glyph:#7b6fd0;--footer:#7a74a6;--footer2:#b0a9d0;--hairline:rgba(30,20,80,.12);--cursor:rgba(30,20,80,.45);--cursor-soft:rgba(30,20,80,.25);}body{transition:background .4s ease,color .4s ease;}html[data-theme="light"].card,html[data-theme="light"].stat,html[data-theme="light"].step,html[data-theme="light"].project,html[data-theme="light"].contact-card,html[data-theme="light"].price-tag{box-shadow:0 6px 26px rgba(80,60,180,.08);}html[data-theme="light"]#stars{filter:invert(1);opacity:.55;}@media(prefers-reduced-motion:reduce){h1{animation:none;}.avatar-wrap{animation:none;}.geo-wrap{animation:none;}}.theme-btn{flex:none;width:42px;height:42px;border-radius:50%;border:1px solid var(--stroke);background:var(--panel);color:var(--text);cursor:pointer;position:relative;transition:border-color .3s,box-shadow .3s,background .4s;}.theme-btn:hover{border-color:rgba(167,139,250,.7);box-shadow:0 0 20px rgba(139,92,246,.35);}.theme-btn svg{position:absolute;top:50%;left:50%;width:19px;height:19px;transform:translate(-50%,-50%);transition:transform .7s cubic-bezier(.6,-.25,.3,1.4),opacity .4s;}.theme-btn .sun{opacity:0;transform:translate(-50%,-50%)rotate(-120deg)scale(.3);}.theme-btn .moon{opacity:1;transform:translate(-50%,-50%)rotate(0)scale(1);}html[data-theme="light"].theme-btn .sun{opacity:1;transform:translate(-50%,-50%)rotate(0)scale(1);}html[data-theme="light"].theme-btn .moon{opacity:0;transform:translate(-50%,-50%)rotate(120deg)scale(.3);}.wipe{position:fixed;inset:0;z-index:200;pointer-events:none;background:var(--bg);clip-path:circle(0 at var(--wx)var(--wy));will-change:clip-path;}.wipe.on{animation:wipeOn .5s cubic-bezier(.7,0,.3,1)forwards;}.wipe.out{animation:wipeOut .55s cubic-bezier(.7,0,.3,1)forwards;}@keyframes wipeOn{to{clip-path:circle(150% at var(--wx)var(--wy));}}@keyframes wipeOut{from{clip-path:circle(150% at var(--wx)var(--wy));}to{clip-path:circle(0 at var(--wx)var(--wy));}}html{scroll-behavior:smooth;}body{font-family:'Fira Code',monospace;color:var(--text);background:var(--bg);text-align:left;overflow-x:hidden;}::selection{background:rgba(139,92,246,.45);color:#fff;}::-webkit-scrollbar{width:10px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:linear-gradient(var(--violet),var(--cyan));border-radius:8px;border:2px solid var(--bg);}#progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:40;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--pink));}#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;}#bg3d{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:none;}html.bg3d-ok #stars{display:none;}html.bg3d-ok #bg3d{display:block;}.about-row{display:grid;grid-template-columns:1.25fr 1fr;gap:2.2rem;align-items:center;}@media(max-width:860px){.about-row{grid-template-columns:1fr;}}.blob{position:fixed;z-index:0;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none;}.blob.b1{width:42vw;height:42vw;background:radial-gradient(circle,var(--blob1),transparent 70%);top:-12vw;left:-10vw;}.blob.b2{width:36vw;height:36vw;background:radial-gradient(circle,var(--blob2),transparent 70%);bottom:-8vw;right:-8vw;opacity:.35;}.blob.b3{width:30vw;height:30vw;background:radial-gradient(circle,var(--blob3),transparent 70%);top:32vh;left:58vw;opacity:.28;}nav{position:fixed;top:0;left:0;right:0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:.85rem 1.6rem;background:var(--nav-bg);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--stroke);}.logo{font-family:'Unbounded';font-weight:800;font-size:1.1rem;text-decoration:none;letter-spacing:.5px;background:linear-gradient(90deg,#a78bfa,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;}.nav-right{display:flex;align-items:center;gap:.9rem;}.nav-links{display:flex;gap:1.5rem;list-style:none;}.hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;border-radius:12px;border:1px solid var(--stroke);background:var(--panel);cursor:pointer;padding:0;z-index:31;transition:border-color .3s;}.hamburger span{display:block;width:20px;height:2px;border-radius:2px;background:var(--text);transition:transform .3s,opacity .3s;}.hamburger:hover{border-color:rgba(167,139,250,.7);}.hamburger.open span:nth-child(1){transform:translateY(7px)rotate(45deg);}.hamburger.open span:nth-child(2){opacity:0;}.hamburger.open span:nth-child(3){transform:translateY(-7px)rotate(-45deg);}.nav-links a{color:var(--muted);text-decoration:none;font-size:.88rem;position:relative;transition:color .2s;}.nav-links a:hover,.nav-links a.active{color:var(--text-strong);}.nav-links a.active::after{content:'';position:absolute;left:0;bottom:-6px;height:2px;width:100%;border-radius:2px;background:linear-gradient(90deg,var(--violet),var(--cyan));}@media(max-width:760px){.nav-links{display:flex;position:fixed;top:0;right:0;bottom:0;width:min(80vw,320px);flex-direction:column;justify-content:flex-start;gap:0;margin:0;padding:5.5rem 2rem 2rem;background:var(--nav-bg);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-left:1px solid var(--stroke);transform:translateX(102%);transition:transform .35s cubic-bezier(.7,0,.3,1);z-index:30;box-shadow:-20px 0 60px rgba(0,0,0,.35);}.nav-links.open{transform:translateX(0);}.nav-links li{width:100%;}.nav-links a{display:block;padding:.95rem 0;font-size:1.05rem;border-bottom:1px solid var(--hairline);}.nav-links a.active::after{display:none;}.hamburger{display:flex;}body.menu-open{overflow:hidden;}}main{position:relative;z-index:5;}.inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;}section{padding:5.5rem 0;}.grad{background:linear-gradient(90deg,#a78bfa,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;}h2.sec{font-family:'Unbounded';font-size:clamp(1.5rem,4vw,2.2rem);margin-bottom:.6rem;font-weight:800;}.sec-num{display:block;font-family:'Fira Code';font-size:.8rem;color:var(--cyan);opacity:.85;letter-spacing:2px;margin-bottom:.5rem;}.sec-sub{color:var(--muted);margin-bottom:2.6rem;font-size:.92rem;}#home{min-height:100svh;display:flex;align-items:center;position:relative;padding-top:4.5rem;}#home .inner{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;width:100%;position:relative;z-index:1;}@media(max-width:860px){#home .inner{grid-template-columns:1fr;}}#home::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(var(--grid-line)1px,transparent 1px),linear-gradient(90deg,var(--grid-line)1px,transparent 1px);background-size:44px 44px;-webkit-mask-image:radial-gradient(ellipse at 50% 45%,#000 20%,transparent 78%);mask-image:radial-gradient(ellipse at 50% 45%,#000 20%,transparent 78%);}.geo{position:absolute;top:7%;right:0.5%;width:min(430px,48vw);height:auto;z-index:2;opacity:.55;pointer-events:none;}.geo .g{fill:none;stroke:url(#geog);stroke-width:2;}.geo .g2{stroke:url(#geog2);}.geo .g3{stroke:url(#geog3);}.geo .g4{stroke:#67e8f9;opacity:.8;}.geo-wrap{animation:geoFloat 9s ease-in-out infinite;}@keyframes geoFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-13px);}}@media(max-width:760px){.geo{opacity:.3;top:4%;}}.avatar-wrap{--a:0deg;width:104px;height:104px;border-radius:50%;padding:3px;margin-bottom:1.5rem;background:conic-gradient(from var(--a),#8b5cf6,#22d3ee,#f472b6,#8b5cf6);animation:hue 6s linear infinite;box-shadow:0 0 50px rgba(139,92,246,.4);}@property --a{syntax:'<angle>';initial-value:0deg;inherits:false;}@keyframes hue{to{--a:360deg;}}.avatar-wrap img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;background:var(--avatar-bg);}h1{font-family:'Unbounded';font-weight:800;font-size:clamp(2.2rem,5.5vw,3.6rem);line-height:1.08;letter-spacing:1px;background:linear-gradient(100deg,#c4b5fd 0%,#8b5cf6 36%,#22d3ee 100%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 6s linear infinite;filter:drop-shadow(0 0 24px rgba(139,92,246,.4));}@keyframes shimmer{to{background-position:200% 0;}}.tagline{margin-top:.95rem;font-family:'Fira Code';font-size:clamp(.7rem,1.9vw,.84rem);color:var(--text);letter-spacing:.3em;text-transform:uppercase;opacity:.85;}.code-block{margin-bottom:1.6rem;width:min(430px,100%);background:rgba(9,9,20,.72);border:1px solid var(--stroke);border-radius:14px;overflow:hidden;backdrop-filter:blur(8px);box-shadow:0 16px 44px rgba(0,0,0,.4);text-align:left;}html[data-theme="light"].code-block{background:rgba(255,255,255,.82);box-shadow:0 14px 40px rgba(80,60,180,.12);}.cb-head{display:flex;align-items:center;gap:.42rem;padding:.55rem .85rem;border-bottom:1px solid var(--stroke);background:rgba(255,255,255,.03);}html[data-theme="light"].cb-head{background:rgba(20,10,60,.04);}.cb-dot{width:10px;height:10px;border-radius:50%;}.cb-dot.r{background:#ff5f57;}.cb-dot.y{background:#febc2e;}.cb-dot.g{background:#28c840;}.cb-title{margin-left:.4rem;font-size:.66rem;color:var(--muted);letter-spacing:1px;}.cb-body{padding:.8rem 1rem .95rem;font-size:.8rem;line-height:1.68;}.cb-line .pr,.cb-line .cm{color:#c084fc;}.cb-line .kw,.cb-line .fn,.cb-line .prop{color:#e9e4ff;}.cb-line .op{color:#a7a1c9;}.cb-line .str{color:#67e8f9;}.cb-line .str2{color:#f9a8d4;}html[data-theme="light"].cb-line .kw,html[data-theme="light"].cb-line .fn,html[data-theme="light"].cb-line .prop{color:#3a2f6e;}html[data-theme="light"].cb-line .op{color:#7a74a6;}.typing{margin-top:1.2rem;font-size:1rem;color:var(--typing);min-height:1.6rem;}.typing::after{content:'▍';color:var(--cyan);animation:blink 1.05s step-end infinite;}@keyframes blink{50%{opacity:0;}}.cta{margin-top:2rem;display:flex;gap:.9rem;flex-wrap:wrap;}.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.5rem;border-radius:999px;border:1px solid var(--stroke);background:rgba(255,255,255,.05);color:var(--text);text-decoration:none;font-size:.92rem;font-family:'Fira Code';transition:.25s;backdrop-filter:blur(6px);}.btn:hover{border-color:rgba(167,139,250,.7);box-shadow:0 0 26px rgba(139,92,246,.35);transform:translateY(-2px);color:var(--text-strong);}.btn.solid{background:linear-gradient(90deg,var(--violet),#6d28d9);border-color:transparent;font-weight:600;}.btn.solid:hover{box-shadow:0 0 34px rgba(139,92,246,.55);}.gem-col{position:relative;height:420px;display:flex;flex-direction:column;align-items:center;justify-content:center;}@media(max-width:860px){.gem-col{height:340px;}}.gem-canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y;border-radius:26px;}.gem-canvas.dragging{cursor:grabbing;}.gem-hint{position:absolute;bottom:6px;font-size:.72rem;color:var(--muted);opacity:.8;letter-spacing:1px;text-transform:uppercase;}.text-p{color:var(--text);opacity:.93;line-height:1.8;font-size:.95rem;}.text-p strong{color:var(--text-strong);}.text-p + .text-p{margin-top:1rem;}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.4rem;}@media(max-width:560px){.stats{grid-template-columns:repeat(3,1fr);gap:.6rem;}}.stat{background:var(--panel);border:1px solid var(--stroke);border-radius:18px;padding:1.4rem 1rem;text-align:center;transition:.3s;}.stat:hover{border-color:rgba(167,139,250,.5);transform:translateY(-4px);}.stat b{font-family:'Unbounded';font-size:clamp(1.4rem,3.5vw,2rem);background:linear-gradient(90deg,#a78bfa,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent;}.stat span{display:block;margin-top:.35rem;font-size:.78rem;color:var(--muted);}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-top:2.2rem;}@media(max-width:760px){.steps{grid-template-columns:1fr 1fr;}}.step{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;padding:1.1rem .7rem;text-align:center;position:relative;transition:.3s;}.step:hover{transform:translateY(-4px);border-color:rgba(34,211,238,.5);}.step .n{font-size:.7rem;color:var(--cyan);letter-spacing:1px;}.step p{margin-top:.45rem;font-size:.84rem;}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.1rem;}.card{background:var(--panel);border:1px solid var(--stroke);border-radius:18px;padding:1.5rem;position:relative;overflow:hidden;transition:.3s;}.card:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.5);box-shadow:0 14px 44px rgba(139,92,246,.16);}.card .ico{font-size:1.8rem;transition:transform .35s cubic-bezier(.6,-.2,.3,1.4);}.card:hover .ico{transform:scale(1.25)rotate(-8deg);}.card h3{font-family:'Unbounded';font-weight:600;font-size:.98rem;margin:.7rem 0 .35rem;}.card p{color:var(--muted);font-size:.82rem;line-height:1.6;}.price-row{display:flex;gap:.9rem;flex-wrap:wrap;}.price-tag{background:var(--price-bg);border:1px solid var(--stroke);padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;transition:.3s;}.price-tag:hover{border-color:rgba(244,114,182,.6);box-shadow:0 0 20px rgba(244,114,182,.2);}.badges{display:flex;flex-wrap:wrap;gap:.6rem;}.badge{background:var(--panel);border:1px solid var(--stroke);padding:.5rem 1.1rem;border-radius:999px;font-size:.82rem;color:var(--text);opacity:.9;transition:.25s;}.badge:hover{background:var(--card-hover);color:var(--text-strong);opacity:1;border-color:rgba(167,139,250,.5);}.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:1.1rem;}.project{background:var(--panel);border:1px solid var(--stroke);border-radius:18px;padding:1.2rem 1.3rem;position:relative;overflow:hidden;transition:.3s;text-decoration:none;color:inherit;display:block;}.project:hover{transform:translateY(-5px);border-color:rgba(167,139,250,.55);box-shadow:0 14px 44px rgba(139,92,246,.16);}.project .strip{position:absolute;top:0;left:0;right:0;height:5px;}.project .glyph{position:absolute;right:-6px;bottom:-22px;font-size:5rem;font-family:'Unbounded';font-weight:800;opacity:.07;color:var(--glyph);}.project h3{font-size:.95rem;font-weight:600;font-family:'Unbounded';}.project span.link{display:inline-block;margin-top:.7rem;font-size:.78rem;color:var(--cyan);}.contact-card{background:var(--panel);border:1px solid var(--stroke);border-radius:22px;padding:1.8rem 2rem;}.contact-row{display:flex;align-items:center;gap:1rem;padding:.85rem 0;border-bottom:1px dashed var(--hairline);}.contact-row:last-of-type{border-bottom:none;}.contact-row .ico{width:42px;height:42px;flex:none;border-radius:12px;background:rgba(139,92,246,.13);display:flex;align-items:center;justify-content:center;font-size:1.15rem;}.contact-row .lbl{font-size:.75rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}.contact-row a{color:var(--text);text-decoration:none;font-size:.92rem;transition:color .2s;}.contact-row a:hover{color:var(--violet);}footer{border-top:1px solid var(--hairline);padding:2.2rem 1.5rem;text-align:center;color:var(--footer);font-size:.85rem;position:relative;z-index:5;}footer .f2{color:var(--footer2);margin-top:.4rem;font-size:.78rem;}.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease;}.reveal.visible{opacity:1;transform:none;}.cursor{position:fixed;z-index:50;width:34px;height:34px;border:1.5px solid var(--cursor);border-radius:50%;pointer-events:none;transform:translate(-50%,-50%);transition:width .18s,height .18s,background .18s,border-color .18s;display:none;}.cursor.hover{width:54px;height:54px;background:rgba(139,92,246,.15);border-color:rgba(167,139,250,.8);}@media(hover:hover)and(pointer:fine){.cursor{display:block;}}.scroll-dot{position:absolute;bottom:1.6rem;left:50%;transform:translateX(-50%);width:24px;height:38px;border:1.5px solid var(--cursor-soft);border-radius:14px;}.scroll-dot::after{content:'';position:absolute;top:7px;left:50%;width:4px;height:8px;margin-left:-2px;border-radius:3px;background:var(--cyan);animation:scrollb 1.8s ease-in-out infinite;}@keyframes scrollb{0%{opacity:0;transform:translateY(0)}30%{opacity:1}100%{opacity:0;transform:translateY(12px)}}@media(max-width:860px){.scroll-dot{display:none;}}.copy-btn{flex:none;width:38px;height:38px;border-radius:10px;border:1px solid var(--stroke);background:var(--panel);color:var(--muted);cursor:pointer;font-size:1rem;line-height:1;transition:.25s;}.copy-btn:hover{color:var(--cyan);border-color:rgba(34,211,238,.55);}.copy-btn.copied{color:#34d399;border-color:rgba(52,211,153,.6);}.project .p-desc{color:var(--muted);font-size:.78rem;line-height:1.55;margin-top:.55rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding-right:2rem;}.project .p-meta{display:flex;align-items:center;gap:1rem;margin-top:.8rem;font-size:.74rem;color:var(--muted);}.project .p-lang{display:inline-flex;align-items:center;gap:.4rem;}.project .p-lang i{width:9px;height:9px;border-radius:50%;display:inline-block;}.project .p-stars{color:var(--text);opacity:.75;}</style>
 
 <div id="progress"></div>
 <canvas id="stars"></canvas>
@@ -208,26 +40,53 @@
 
 <nav>
   <a href="#home" class="logo">Obyzava</a>
-  <ul class="nav-links">
+  <div class="nav-right">
+    <ul class="nav-links" id="navMenu">
     <li><a href="#home" class="active" data-nav="home">Главная</a></li>
     <li><a href="#about" data-nav="about">Обо мне</a></li>
     <li><a href="#services" data-nav="services">Услуги</a></li>
     <li><a href="#portfolio" data-nav="portfolio">Портфолио</a></li>
     <li><a href="#contact" data-nav="contact">Контакты</a></li>
   </ul>
-  <button class="theme-btn" id="themeBtn" aria-label="Тема" title="Тема">
+    <button class="hamburger" id="menuBtn" aria-label="Меню" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Тема" title="Тема">
     <svg class="moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="#e8ecff"/></svg>
     <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5" fill="#fbbf24" stroke="#fbbf24"/><path d="M12 2v2.6M12 19.4V22M2 12h2.6M19.4 12H22M4.9 4.9l1.9 1.9M17.2 17.2l1.9 1.9M4.9 19.1l1.9-1.9M17.2 6.8l1.9-1.9"/></svg>
   </button>
+  </div>
 </nav>
 
 <main>
   <section id="home">
+    <svg class="geo" viewBox="0 0 400 400" aria-hidden="true">
+      <defs>
+        <linearGradient id="geog" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+        <linearGradient id="geog2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#f472b6"/></linearGradient>
+        <linearGradient id="geog3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f472b6"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+      </defs>
+      <g class="geo-wrap">
+        <polygon class="g g1" points="200,20 346,110 346,290 200,380 54,290 54,110"/>
+        <polygon class="g g2" points="120,85 148,132 92,132"/>
+        <polygon class="g g3" points="322,84 358,124 322,164 286,124"/>
+        <polygon class="g g4" points="300,320 326,346 300,372 274,346"/>
+      </g>
+    </svg>
     <div class="inner">
       <div>
-        <div class="avatar-wrap"><img src="https://avatars.githubusercontent.com/u/212697059?v=4" alt="Obyzava" onerror="this.src='https://user.uploads.dev/file/0523e08eff1cdcc250554785fee37068.svg'"></div>
+        <div class="avatar-wrap"><img src="https://endway.org/data/avatars/l/56/56812.jpg?1767427353" alt="Obyzava" onerror="this.onerror=null;this.src='https://user.uploads.dev/file/0523e08eff1cdcc250554785fee37068.svg'"></div>
+        <div class="code-block">
+          <div class="cb-head"><span class="cb-dot r"></span><span class="cb-dot y"></span><span class="cb-dot g"></span><span class="cb-title">whoami — bash</span></div>
+          <div class="cb-body">
+            <div class="cb-line"><span class="pr">$</span> <span class="cm">whoami</span></div>
+            <div class="cb-line"><span class="kw">const</span> <span class="fn">creator</span> <span class="op">=</span> <span class="op">{</span></div>
+            <div class="cb-line">&nbsp;&nbsp;<span class="prop">name</span><span class="op">:</span> <span class="str">'Obyzava'</span><span class="op">,</span></div>
+            <div class="cb-line">&nbsp;&nbsp;<span class="prop">role</span><span class="op">:</span> <span class="str">'Digital Creator'</span><span class="op">,</span></div>
+            <div class="cb-line">&nbsp;&nbsp;<span class="prop">stack</span><span class="op">:</span> <span class="op">[</span><span class="str2">'bots'</span><span class="op">,</span> <span class="str2">'sites'</span><span class="op">,</span> <span class="str2">'games'</span><span class="op">]</span></div>
+            <div class="cb-line"><span class="op">};</span></div>
+          </div>
+        </div>
         <h1>Obyzava</h1>
-        <div class="role">👨‍💻 <span class="grad">Digital Creator</span></div>
+        <div class="tagline">BOTS · SITES · GAMES · AUTOMATION</div>
         <div class="typing" id="typingText"></div>
         <div class="cta">
           <a class="btn solid" href="https://t.me/Obyzava_V4" target="_blank" rel="noopener">💬 Telegram</a>
@@ -325,7 +184,7 @@
       <div class="sec-sub">Открыт к новым проектам, идеям и вызовам.</div>
       <div class="contact-card">
         <div class="contact-row"><div class="ico">💬</div><div style="flex:1"><div class="lbl">Telegram · основной</div><a href="https://t.me/Obyzava_V4" target="_blank" rel="noopener">@Obyzava_V4</a></div></div>
-        <div class="contact-row"><div class="ico">📧</div><div style="flex:1"><div class="lbl">Email</div><a href="mailto:Obyzavav2@gmail.com">Obyzavav2@gmail.com</a></div></div>
+        <div class="contact-row"><div class="ico">📧</div><div style="flex:1"><div class="lbl">Email</div><a href="mailto:Obyzavav2@gmail.com">Obyzavav2@gmail.com</a></div><button class="copy-btn" id="copyEmailBtn" data-copy="Obyzavav2@gmail.com" aria-label="Скопировать email" title="Скопировать">⧉</button></div>
         <div class="contact-row"><div class="ico">🐙</div><div style="flex:1"><div class="lbl">GitHub</div><a href="https://github.com/obyzavav2" target="_blank" rel="noopener">obyzavav2</a></div></div>
         <div class="contact-row"><div class="ico">🎬</div><div style="flex:1"><div class="lbl">YouTube</div><a href="https://www.youtube.com/@Obyzava" target="_blank" rel="noopener">@Obyzava</a></div></div>
         <div class="contact-row"><div class="ico">🔴</div><div style="flex:1"><div class="lbl">Reddit</div><a href="https://www.reddit.com/user/Obyzava/" target="_blank" rel="noopener">u/Obyzava</a></div></div>
@@ -340,622 +199,12 @@
   <div class="f2">Разработка ботов, сайтов и цифровых решений</div>
 </footer>
 
-<script type="module">
-  import * as THREE from "https://esm.sh/three@0.160.0";
-  import { RoomEnvironment } from "https://esm.sh/three@0.160.0/examples/jsm/environments/RoomEnvironment.js";
-  import { GLTFLoader } from "https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";
+<script type="module">import*as THREE from"https://esm.sh/three@0.160.0";import{RoomEnvironment}from"https://esm.sh/three@0.160.0/examples/jsm/environments/RoomEnvironment.js";import{GLTFLoader}from"https://esm.sh/three@0.160.0/examples/jsm/loaders/GLTFLoader.js";const MODEL_URL="https://user.uploads.dev/file/f01e184e00b208168ccd0b8fd0fc7ea7.glb",canvas=document.getElementById("gem"),col=canvas.parentElement;let renderer,scene,camera,gemGroup,orbitGroup,ring,core,glowTex,floaters=[],sats=[],mixer=null,robot=null;const modelGroup=new THREE.Group,pointer={x:0,y:0,dragging:!1,lastX:0,lastY:0,vx:0,vy:0};function shadowTexture(){const e=document.createElement("canvas");e.width=e.height=128;const t=e.getContext("2d"),n=t.createRadialGradient(64,64,4,64,64,64);return n.addColorStop(0,"rgba(139,92,246,1)"),n.addColorStop(.35,"rgba(34,211,238,.5)"),n.addColorStop(1,"rgba(139,92,246,0)"),t.fillStyle=n,t.fillRect(0,0,128,128),new THREE.CanvasTexture(e)}function glowTexture(){const e=document.createElement("canvas");e.width=e.height=256;const t=e.getContext("2d"),n=t.createRadialGradient(128,128,0,128,128,128);n.addColorStop(0,"rgba(167,139,250,1)"),n.addColorStop(.35,"rgba(139,92,246,0.45)"),n.addColorStop(1,"rgba(139,92,246,0)"),t.fillStyle=n,t.fillRect(0,0,256,256);return new THREE.CanvasTexture(e)}try{renderer=new THREE.WebGLRenderer({canvas:canvas,antialias:!0,alpha:!0,preserveDrawingBuffer:!0}),renderer.setPixelRatio(Math.min(devicePixelRatio,2)),renderer.toneMapping=THREE.ACESFilmicToneMapping,renderer.toneMappingExposure=1.3,scene=new THREE.Scene,camera=new THREE.PerspectiveCamera(50,1,.1,100),camera.position.set(0,0,8);const e=new THREE.PMREMGenerator(renderer);scene.environment=e.fromScene(new RoomEnvironment,.02).texture,scene.add(new THREE.AmbientLight(16777215,.9));const t=(e,t,n,o,r)=>{const i=new THREE.PointLight(e,r,30);return i.position.set(t,n,o),scene.add(i),i};t(9133302,-4,3,3,80),t(2282478,4,-3,2,80),t(16020150,0,4,-3,55),t(2282478,3,2,-4,45),gemGroup=new THREE.Group;const n=new THREE.Mesh(new THREE.IcosahedronGeometry(1.55,0),new THREE.MeshPhysicalMaterial({color:10320895,metalness:.3,roughness:.12,transmission:.9,thickness:1.2,transparent:!0,opacity:.3,clearcoat:1,clearcoatRoughness:.1})),o=new THREE.Mesh(new THREE.IcosahedronGeometry(1.57,1),new THREE.MeshBasicMaterial({color:2282478,wireframe:!0,transparent:!0,opacity:.3}));core=new THREE.Mesh(new THREE.IcosahedronGeometry(.62,2),new THREE.MeshStandardMaterial({color:9133302,emissive:8141549,emissiveIntensity:1.7,roughness:.3,metalness:.3})),gemGroup.add(n,o,core),ring=new THREE.Mesh(new THREE.TorusGeometry(1.9,.05,12,100),new THREE.MeshBasicMaterial({color:16020150,transparent:!0,opacity:1})),ring.rotation.x=1.35,orbitGroup=new THREE.Group,orbitGroup.add(ring);const r=new THREE.Mesh(new THREE.SphereGeometry(.2,24,24),new THREE.MeshStandardMaterial({color:2282478,emissive:947344,emissiveIntensity:1.5,roughness:.3})),i=new THREE.Mesh(new THREE.SphereGeometry(.14,24,24),new THREE.MeshStandardMaterial({color:16020150,emissive:10295117,emissiveIntensity:1.5,roughness:.3})),a=new THREE.Mesh(new THREE.OctahedronGeometry(.18),new THREE.MeshStandardMaterial({color:10980346,emissive:7153881,emissiveIntensity:1.4,roughness:.3}));r.position.set(2.9,.5,0),i.position.set(-2.9,-.6,.6),a.position.set(.5,2.4,.4),orbitGroup.add(r,i,a),sats=[r,i,a],scene.add(gemGroup),scene.add(orbitGroup),glowTex=glowTexture();const s=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:9133302,transparent:!0,opacity:.3,blending:THREE.AdditiveBlending,depthWrite:!1}));s.scale.set(6.5,6.5,1),s.position.set(0,.2,-2),scene.add(s);const c=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTex,color:2282478,transparent:!0,opacity:.14,blending:THREE.AdditiveBlending,depthWrite:!1}));c.scale.set(9,9,1),c.position.set(0,-.4,-3.5),scene.add(c);const d=new THREE.Mesh(new THREE.CircleGeometry(4.5,48),new THREE.MeshBasicMaterial({map:shadowTexture(),transparent:!0,depthWrite:!1,blending:THREE.AdditiveBlending}));d.rotation.x=-Math.PI/2,d.position.set(0,0,0),scene.add(d);const l=new THREE.Mesh(new THREE.TorusGeometry(1.6,.045,10,80),new THREE.MeshBasicMaterial({color:2282478,transparent:!0,opacity:.85}));l.rotation.x=-Math.PI/2,l.position.set(0,-2.62,0),scene.add(l);const m=new THREE.DirectionalLight(16777215,3);m.position.set(4,6,5),scene.add(m);const p=new THREE.DirectionalLight(9133302,2.4);function fitRobot(){robot&&(robot.scale.setScalar(1.05),robot.position.set(0,0,0),modelGroup.position.set(0,-2,0),modelGroup.userData.baseY=-2,d.position.set(0,-1.99,0),l.position.set(0,-1.98,0))}p.position.set(-5,2,-3),scene.add(p),scene.add(modelGroup),(new GLTFLoader).load(MODEL_URL,(e=>{if(robot=e.scene,robot.traverse((e=>{if(e.isMesh){const t=e.material;t.metalness=Math.max(t.metalness,.15),t.roughness=Math.min(t.roughness,.65),t.envMapIntensity=1.5,t.emissive||(t.emissive=new THREE.Color);const n=t.color.clone().multiplyScalar(1);n.r=Math.max(n.r,.18),n.g=Math.max(n.g,.18),n.b=Math.max(n.b,.18),t.emissive.copy(n).multiplyScalar(.8),e.castShadow=!0}})),modelGroup.add(robot),fitRobot(),e.animations&&e.animations.length){mixer=new THREE.AnimationMixer(robot);const t=e.animations.find((e=>/idle/i.test(e.name)))||e.animations[0];mixer.clipAction(t).play()}gemGroup.visible=!1,orbitGroup&&(orbitGroup.position.y=1.55)}),void 0,(e=>{console.error("model load failed",e)}));const E=[{g:new THREE.TorusKnotGeometry(.5,.16,100,16),m:new THREE.MeshStandardMaterial({color:2282478,emissive:947344,emissiveIntensity:.8,roughness:.4,metalness:.6})},{g:new THREE.OctahedronGeometry(.55),m:new THREE.MeshStandardMaterial({color:16020150,emissive:10295117,emissiveIntensity:.9,roughness:.35,metalness:.5})},{g:new THREE.DodecahedronGeometry(.45),m:new THREE.MeshStandardMaterial({color:9133302,emissive:5972406,emissiveIntensity:.9,roughness:.4,metalness:.5})}],h=[[-3.8,1.9,-1.5],[3.7,-1.6,-1.2],[-3.2,-2.2,-2.2],[3.4,2.1,-2]];for(let S=0;S<h.length;S++){const L=E[S%E.length],I=new THREE.Mesh(L.g,L.m);I.position.set(...h[S]),I.userData={spin:.02*(2*Math.random()-1),ph:Math.random()*Math.PI*2},scene.add(I),floaters.push(I)}const g=new THREE.BufferGeometry,u=260,T=new Float32Array(3*u);for(let C=0;C<u;C++){const A=6+10*Math.random(),P=Math.random()*Math.PI*2,D=Math.acos(2*Math.random()-1);T[3*C]=A*Math.sin(D)*Math.cos(P),T[3*C+1]=A*Math.sin(D)*Math.sin(P),T[3*C+2]=A*Math.cos(D)}g.setAttribute("position",new THREE.BufferAttribute(T,3));const R=new THREE.Points(g,new THREE.PointsMaterial({color:12561151,size:.08,transparent:!0,opacity:.9,depthWrite:!1}));scene.add(R);let w=1,M=1;function resize(){w=col.clientWidth||1,M=col.clientHeight||1,renderer.setSize(w,M),camera.aspect=w/M,camera.updateProjectionMatrix(),fitRobot()}new ResizeObserver(resize).observe(col),resize();const v=matchMedia("(prefers-reduced-motion: reduce)").matches,H=new THREE.Clock;function animate(){if(v)return;const e=H.getElapsedTime();mixer&&mixer.update(H.getDelta());const t=robot?modelGroup:gemGroup;pointer.dragging?(t.rotation.y+=pointer.vx,t.rotation.x=Math.max(-.9,Math.min(.9,t.rotation.x+pointer.vy)),pointer.vx*=.9,pointer.vy*=.9):(t.rotation.y+=.005,t.rotation.x+=.0012*Math.sin(.25*e)),t.position.y=(robot&&modelGroup.userData.baseY||0)+.12*Math.sin(.7*e),robot&&orbitGroup&&(orbitGroup.position.y=1+.06*Math.sin(.6*e)),ring.rotation.z=.5*e,ring.rotation.x=1.35+.15*Math.sin(.4*e),sats.forEach(((t,n)=>{const o=.5*e+2.1*n,r=t.position.length(),i=Math.cos(o)*r,a=.8*Math.sin(.8*o),s=Math.sin(o)*r;t.position.x+=.04*(i-t.position.x),t.position.y+=.04*(a-t.position.y),t.position.z+=.04*(s-t.position.z),t.rotation.x+=.02,t.rotation.y+=.03})),floaters.forEach((t=>{t.rotation.x+=t.userData.spin,t.rotation.y+=.006,t.position.y+=.0015*Math.sin(.6*e+t.userData.ph)})),R.rotation.y=.012*e,camera.position.x+=.02*(.7*pointer.x-camera.position.x),camera.position.y+=.02*(.5*-pointer.y-camera.position.y),camera.lookAt(0,0,0),renderer.render(scene,camera),b&&(G=requestAnimationFrame(animate))}canvas.addEventListener("pointerdown",(e=>{pointer.dragging=!0,pointer.lastX=e.clientX,pointer.lastY=e.clientY,canvas.classList.add("dragging"),canvas.setPointerCapture(e.pointerId)})),canvas.addEventListener("pointermove",(e=>{pointer.x=e.clientX/innerWidth*2-1,pointer.y=e.clientY/innerHeight*2-1,pointer.dragging&&(pointer.vx=.005*(e.clientX-pointer.lastX),pointer.vy=.005*(e.clientY-pointer.lastY),pointer.lastX=e.clientX,pointer.lastY=e.clientY)}));const y=()=>{pointer.dragging=!1,canvas.classList.remove("dragging")};canvas.addEventListener("pointerup",y),canvas.addEventListener("pointercancel",y),canvas.addEventListener("pointerleave",(e=>{pointer.dragging&&y()})),window.__gem={THREE:THREE,renderer:renderer,scene:scene,camera:camera,gemGroup:gemGroup,modelGroup:modelGroup,get robotLoaded(){return!!robot},get anims(){return mixer?mixer._actions.map((e=>e.getClip().name)):null},render:()=>renderer.render(scene,camera)};let G=null,b=!1,x=!0;function startGem(){b||v||(b=!0,G=requestAnimationFrame(animate))}function stopGem(){b=!1,G&&(cancelAnimationFrame(G),G=null)}const f=e=>{x=e,e?startGem():stopGem()};"IntersectionObserver"in window&&new IntersectionObserver((e=>e.forEach((e=>f(e.isIntersecting)))),{threshold:.02}).observe(canvas),document.addEventListener("visibilitychange",(()=>{document.hidden?stopGem():x&&startGem()})),v?renderer.render(scene,camera):startGem()}catch(B){console.error("3D failed",B),col.innerHTML='<div style="font-size:4rem;opacity:.3">💎</div>'}</script>
 
-  const MODEL_URL = "https://user.uploads.dev/file/f01e184e00b208168ccd0b8fd0fc7ea7.glb";
-  const canvas = document.getElementById('gem');
-  const col = canvas.parentElement;
-
-  let renderer, scene, camera, gemGroup, orbitGroup, ring, core;
-  let floaters = [], sats = [], glowTex;
-  let mixer = null, robot = null;
-  const modelGroup = new THREE.Group();
-  const pointer = { x:0, y:0, dragging:false, lastX:0, lastY:0, vx:0, vy:0 };
-
-  function shadowTexture() {
-    const c = document.createElement('canvas'); c.width = c.height = 128;
-    const g = c.getContext('2d');
-    const gr = g.createRadialGradient(64,64,4,64,64,64);
-    gr.addColorStop(0,'rgba(139,92,246,1)');
-    gr.addColorStop(0.35,'rgba(34,211,238,.5)');
-    gr.addColorStop(1,'rgba(139,92,246,0)');
-    g.fillStyle = gr; g.fillRect(0,0,128,128);
-    return new THREE.CanvasTexture(c);
-  }
-
-  function glowTexture() {
-    const c = document.createElement('canvas'); c.width = c.height = 256;
-    const g = c.getContext('2d');
-    const gr = g.createRadialGradient(128,128,0,128,128,128);
-    gr.addColorStop(0,'rgba(167,139,250,1)');
-    gr.addColorStop(0.35,'rgba(139,92,246,0.45)');
-    gr.addColorStop(1,'rgba(139,92,246,0)');
-    g.fillStyle = gr; g.fillRect(0,0,256,256);
-    const t = new THREE.CanvasTexture(c);
-    return t;
-  }
-
-  try {
-    renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, preserveDrawingBuffer:true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.3;
-
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-    camera.position.set(0, 0, 8);
-
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.02).texture;
-
-    scene.add(new THREE.AmbientLight(0xffffff, 0.9));
-    const pl = (color,x,y,z,i) => { const p = new THREE.PointLight(color, i, 30); p.position.set(x,y,z); scene.add(p); return p; };
-    pl(0x8b5cf6, -4, 3, 3, 80);
-    pl(0x22d3ee, 4, -3, 2, 80);
-    pl(0xf472b6, 0, 4, -3, 55);
-    pl(0x22d3ee, 3, 2, -4, 45);
-
-    gemGroup = new THREE.Group();
-    const glass = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.55, 0),
-      new THREE.MeshPhysicalMaterial({ color:0x9d7bff, metalness:0.3, roughness:0.12, transmission:0.9, thickness:1.2, transparent:true, opacity:0.3, clearcoat:1, clearcoatRoughness:0.1 })
-    );
-    const wire = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(1.57, 1),
-      new THREE.MeshBasicMaterial({ color:0x22d3ee, wireframe:true, transparent:true, opacity:0.3 })
-    );
-    core = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(0.62, 2),
-      new THREE.MeshStandardMaterial({ color:0x8b5cf6, emissive:0x7c3aed, emissiveIntensity:1.7, roughness:0.3, metalness:0.3 })
-    );
-    gemGroup.add(glass, wire, core);
-    ring = new THREE.Mesh(
-      new THREE.TorusGeometry(1.9, 0.05, 12, 100),
-      new THREE.MeshBasicMaterial({ color:0xf472b6, transparent:true, opacity:1 })
-    );
-    ring.rotation.x = 1.35;
-
-    orbitGroup = new THREE.Group();
-    orbitGroup.add(ring);
-
-    const s1 = new THREE.Mesh(new THREE.SphereGeometry(0.2, 24, 24), new THREE.MeshStandardMaterial({ color:0x22d3ee, emissive:0x0e7490, emissiveIntensity:1.5, roughness:0.3 }));
-    const s2 = new THREE.Mesh(new THREE.SphereGeometry(0.14, 24, 24), new THREE.MeshStandardMaterial({ color:0xf472b6, emissive:0x9d174d, emissiveIntensity:1.5, roughness:0.3 }));
-    const s3 = new THREE.Mesh(new THREE.OctahedronGeometry(0.18), new THREE.MeshStandardMaterial({ color:0xa78bfa, emissive:0x6d28d9, emissiveIntensity:1.4, roughness:0.3 }));
-    s1.position.set(2.9, 0.5, 0); s2.position.set(-2.9, -0.6, 0.6); s3.position.set(0.5, 2.4, 0.4);
-    orbitGroup.add(s1, s2, s3);
-    sats = [s1, s2, s3];
-
-    scene.add(gemGroup);
-    scene.add(orbitGroup);
-
-    glowTex = glowTexture();
-    const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color:0x8b5cf6, transparent:true, opacity:0.3, blending:THREE.AdditiveBlending, depthWrite:false }));
-    glow.scale.set(6.5, 6.5, 1); glow.position.set(0, 0.2, -2);
-    scene.add(glow);
-    const glow2 = new THREE.Sprite(new THREE.SpriteMaterial({ map:glowTex, color:0x22d3ee, transparent:true, opacity:0.14, blending:THREE.AdditiveBlending, depthWrite:false }));
-    glow2.scale.set(9, 9, 1); glow2.position.set(0, -0.4, -3.5);
-    scene.add(glow2);
-
-    const shadow = new THREE.Mesh(
-      new THREE.CircleGeometry(4.5, 48),
-      new THREE.MeshBasicMaterial({ map:shadowTexture(), transparent:true, depthWrite:false, blending:THREE.AdditiveBlending })
-    );
-    shadow.rotation.x = -Math.PI / 2;
-    shadow.position.set(0, 0, 0);
-    scene.add(shadow);
-    const platformRing = new THREE.Mesh(
-      new THREE.TorusGeometry(1.6, 0.045, 10, 80),
-      new THREE.MeshBasicMaterial({ color:0x22d3ee, transparent:true, opacity:0.85 })
-    );
-    platformRing.rotation.x = -Math.PI / 2;
-    platformRing.position.set(0, -2.62, 0);
-    scene.add(platformRing);
-
-    const dirLight = new THREE.DirectionalLight(0xffffff, 3);
-    dirLight.position.set(4, 6, 5);
-    scene.add(dirLight);
-    const dirLight2 = new THREE.DirectionalLight(0x8b5cf6, 2.4);
-    dirLight2.position.set(-5, 2, -3);
-    scene.add(dirLight2);
-
-    scene.add(modelGroup);
-    function fitRobot() {
-      if (!robot) return;
-      robot.scale.setScalar(1.05);
-      robot.position.set(0, 0, 0);
-      modelGroup.position.set(0, -2.0, 0);
-      modelGroup.userData.baseY = -2.0;
-      shadow.position.set(0, -1.99, 0);
-      platformRing.position.set(0, -1.98, 0);
-    }
-    new GLTFLoader().load(MODEL_URL, gltf => {
-      robot = gltf.scene;
-      robot.traverse(o => {
-        if (o.isMesh) {
-          const m = o.material;
-          m.metalness = Math.max(m.metalness, 0.15);
-          m.roughness = Math.min(m.roughness, 0.65);
-          m.envMapIntensity = 1.5;
-          if (!m.emissive) m.emissive = new THREE.Color();
-          const base = m.color.clone().multiplyScalar(1.0);
-          base.r = Math.max(base.r, 0.18); base.g = Math.max(base.g, 0.18); base.b = Math.max(base.b, 0.18);
-          m.emissive.copy(base).multiplyScalar(0.8);
-          o.castShadow = true;
-        }
-      });
-      modelGroup.add(robot);
-      fitRobot();
-      if (gltf.animations && gltf.animations.length) {
-        mixer = new THREE.AnimationMixer(robot);
-        const idle = gltf.animations.find(a => /idle/i.test(a.name)) || gltf.animations[0];
-        mixer.clipAction(idle).play();
-      }
-      gemGroup.visible = false;
-      if (orbitGroup) orbitGroup.position.y = 1.55;
-    }, undefined, err => { console.error('model load failed', err); });
-
-    const shapes = [
-      { g:new THREE.TorusKnotGeometry(0.5, 0.16, 100, 16), m:new THREE.MeshStandardMaterial({ color:0x22d3ee, emissive:0x0e7490, emissiveIntensity:0.8, roughness:0.4, metalness:0.6 }) },
-      { g:new THREE.OctahedronGeometry(0.55), m:new THREE.MeshStandardMaterial({ color:0xf472b6, emissive:0x9d174d, emissiveIntensity:0.9, roughness:0.35, metalness:0.5 }) },
-      { g:new THREE.DodecahedronGeometry(0.45), m:new THREE.MeshStandardMaterial({ color:0x8b5cf6, emissive:0x5b21b6, emissiveIntensity:0.9, roughness:0.4, metalness:0.5 }) },
-    ];
-    const pos = [[-3.8, 1.9, -1.5], [3.7, -1.6, -1.2], [-3.2, -2.2, -2.2], [3.4, 2.1, -2]];
-    for (let i = 0; i < pos.length; i++) {
-      const s = shapes[i % shapes.length];
-      const m = new THREE.Mesh(s.g, s.m);
-      m.position.set(...pos[i]);
-      m.userData = { spin: (Math.random()*2-1)*0.02, ph: Math.random()*Math.PI*2 };
-      scene.add(m); floaters.push(m);
-    }
-
-    const starGeo = new THREE.BufferGeometry();
-    const n = 260, arr = new Float32Array(n * 3);
-    for (let i = 0; i < n; i++) {
-      const r = 6 + Math.random() * 10;
-      const th = Math.random() * Math.PI * 2;
-      const ph = Math.acos(2 * Math.random() - 1);
-      arr[i*3] = r * Math.sin(ph) * Math.cos(th);
-      arr[i*3+1] = r * Math.sin(ph) * Math.sin(th);
-      arr[i*3+2] = r * Math.cos(ph);
-    }
-    starGeo.setAttribute('position', new THREE.BufferAttribute(arr, 3));
-    const stars = new THREE.Points(starGeo, new THREE.PointsMaterial({ color:0xbfaaff, size:0.08, transparent:true, opacity:0.9, depthWrite:false }));
-    scene.add(stars);
-
-    let w = 1, h = 1;
-    function resize() {
-      w = col.clientWidth || 1; h = col.clientHeight || 1;
-      renderer.setSize(w, h);
-      camera.aspect = w / h;
-      camera.updateProjectionMatrix();
-      fitRobot();
-    }
-    const ro = new ResizeObserver(resize); ro.observe(col);
-    resize();
-
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const clock = new THREE.Clock();
-
-    function animate() {
-      if (reduced) return;
-      const t = clock.getElapsedTime();
-      if (mixer) mixer.update(clock.getDelta());
-      const active = robot ? modelGroup : gemGroup;
-      if (!pointer.dragging) {
-        active.rotation.y += 0.005;
-        active.rotation.x += Math.sin(t * 0.25) * 0.0012;
-      } else {
-        active.rotation.y += pointer.vx;
-        active.rotation.x = Math.max(-0.9, Math.min(0.9, active.rotation.x + pointer.vy));
-        pointer.vx *= 0.9; pointer.vy *= 0.9;
-      }
-      active.position.y = (robot ? modelGroup.userData.baseY || 0 : 0) + Math.sin(t * 0.7) * 0.12;
-      if (robot && orbitGroup) orbitGroup.position.y = 1.0 + Math.sin(t * 0.6) * 0.06;
-      ring.rotation.z = t * 0.5;
-      ring.rotation.x = 1.35 + Math.sin(t * 0.4) * 0.15;
-      sats.forEach((s, i) => {
-        const a = t * 0.5 + i * 2.1;
-        const rad = s.position.length();
-        const base = { x:Math.cos(a)*rad, y:Math.sin(a*0.8)*0.8, z:Math.sin(a)*rad };
-        s.position.x += (base.x - s.position.x) * 0.04;
-        s.position.y += (base.y - s.position.y) * 0.04;
-        s.position.z += (base.z - s.position.z) * 0.04;
-        s.rotation.x += 0.02; s.rotation.y += 0.03;
-      });
-      floaters.forEach(m => {
-        m.rotation.x += m.userData.spin; m.rotation.y += 0.006;
-        m.position.y += Math.sin(t * 0.6 + m.userData.ph) * 0.0015;
-      });
-      stars.rotation.y = t * 0.012;
-      camera.position.x += (pointer.x * 0.7 - camera.position.x) * 0.02;
-      camera.position.y += (-pointer.y * 0.5 - camera.position.y) * 0.02;
-      camera.lookAt(0, 0, 0);
-      renderer.render(scene, camera);
-      requestAnimationFrame(animate);
-    }
-
-    canvas.addEventListener('pointerdown', e => {
-      pointer.dragging = true; pointer.lastX = e.clientX; pointer.lastY = e.clientY;
-      canvas.classList.add('dragging'); canvas.setPointerCapture(e.pointerId);
-    });
-    canvas.addEventListener('pointermove', e => {
-      pointer.x = (e.clientX / innerWidth) * 2 - 1;
-      pointer.y = (e.clientY / innerHeight) * 2 - 1;
-      if (pointer.dragging) {
-        pointer.vx = (e.clientX - pointer.lastX) * 0.005;
-        pointer.vy = (e.clientY - pointer.lastY) * 0.005;
-        pointer.lastX = e.clientX; pointer.lastY = e.clientY;
-      }
-    });
-    const endDrag = () => { pointer.dragging = false; canvas.classList.remove('dragging'); };
-    canvas.addEventListener('pointerup', endDrag);
-    canvas.addEventListener('pointercancel', endDrag);
-    canvas.addEventListener('pointerleave', e => { if (pointer.dragging) endDrag(); });
-
-    window.__gem = { THREE, renderer, scene, camera, gemGroup, modelGroup, get robotLoaded() { return !!robot; }, get anims() { return mixer ? mixer._actions.map(a => a.getClip().name) : null; }, render: () => renderer.render(scene, camera) };
-
-    if (!reduced) requestAnimationFrame(animate);
-    else renderer.render(scene, camera);
-  } catch (err) {
-    console.error('3D failed', err);
-    col.innerHTML = '<div style="font-size:4rem;opacity:.3">💎</div>';
-  }
-</script>
-
-<script type="module">
-import * as THREE from "https://esm.sh/three@0.160.0";
-const bgCanvas = document.getElementById('bg3d');
-if (bgCanvas && window.WebGLRenderingContext) {
-  try {
-    const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha:true, antialias:false, powerPreference:'high-performance' });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, innerWidth/innerHeight, 0.1, 240);
-    camera.position.set(0, 0, 2);
-
-    function softTex(size) {
-      const c = document.createElement('canvas'); c.width = c.height = size;
-      const g = c.getContext('2d');
-      const gr = g.createRadialGradient(size/2, size/2, 0, size/2, size/2, size/2);
-      gr.addColorStop(0, 'rgba(255,255,255,1)');
-      gr.addColorStop(0.35, 'rgba(200,190,255,0.7)');
-      gr.addColorStop(1, 'rgba(120,90,255,0)');
-      g.fillStyle = gr; g.fillRect(0, 0, size, size);
-      return new THREE.CanvasTexture(c);
-    }
-
-    const mobile = innerWidth < 768;
-    const COUNT = mobile ? 360 : 1400;
-    const pos = new Float32Array(COUNT*3);
-    const col = new Float32Array(COUNT*3);
-    const palette = [new THREE.Color(0x8b5cf6), new THREE.Color(0x22d3ee), new THREE.Color(0xf472b6), new THREE.Color(0xa78bfa), new THREE.Color(0xffffff)];
-    for (let i = 0; i < COUNT; i++) {
-      const r = 14 + Math.random()*46;
-      const th = Math.random()*Math.PI*2;
-      const ph = Math.acos(2*Math.random()-1);
-      pos[i*3]   = r*Math.sin(ph)*Math.cos(th);
-      pos[i*3+1] = r*Math.sin(ph)*Math.sin(th);
-      pos[i*3+2] = r*Math.cos(ph);
-      const c = palette[(Math.random()*palette.length)|0];
-      col[i*3] = c.r; col[i*3+1] = c.g; col[i*3+2] = c.b;
-    }
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-    geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
-    const pts = new THREE.Points(geo, new THREE.PointsMaterial({
-      map: softTex(64),
-      size: 0.4,
-      vertexColors: true,
-      transparent: true,
-      opacity: 1,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true
-    }));
-    scene.add(pts);
-
-    const BIG = mobile ? 60 : 140;
-    const bpos = new Float32Array(BIG*3);
-    const bcol = new Float32Array(BIG*3);
-    for (let i = 0; i < BIG; i++) {
-      const r = 16 + Math.random()*40;
-      const th = Math.random()*Math.PI*2;
-      const ph = Math.acos(2*Math.random()-1);
-      bpos[i*3]   = r*Math.sin(ph)*Math.cos(th);
-      bpos[i*3+1] = r*Math.sin(ph)*Math.sin(th);
-      bpos[i*3+2] = r*Math.cos(ph);
-      const c = palette[(Math.random()*palette.length)|0];
-      bcol[i*3] = c.r; bcol[i*3+1] = c.g; bcol[i*3+2] = c.b;
-    }
-    const bgeo = new THREE.BufferGeometry();
-    bgeo.setAttribute('position', new THREE.BufferAttribute(bpos, 3));
-    bgeo.setAttribute('color', new THREE.BufferAttribute(bcol, 3));
-    const bigPts = new THREE.Points(bgeo, new THREE.PointsMaterial({
-      map: softTex(64),
-      size: 1.3,
-      vertexColors: true,
-      transparent: true,
-      opacity: 0.6,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending,
-      sizeAttenuation: true
-    }));
-    scene.add(bigPts);
-
-    const nebDefs = [
-      { color:0x8b5cf6, s:34, o:0.17, p:[-22, 10, -30] },
-      { color:0x22d3ee, s:29, o:0.14, p:[26, -14, -36] },
-      { color:0xf472b6, s:25, o:0.13, p:[8, 24, -42] },
-      { color:0x7c3aed, s:38, o:0.15, p:[18, 6, -54] },
-      { color:0x67e8f9, s:20, o:0.12, p:[-26, -18, -28] },
-      { color:0x8b5cf6, s:29, o:0.12, p:[-12, -26, -32] },
-      { color:0xf472b6, s:23, o:0.11, p:[30, 20, -48] },
-      { color:0x6366f1, s:32, o:0.13, p:[-40, -30, -42] }
-    ];
-    const nebs = nebDefs.map(d => {
-      const sp = new THREE.Sprite(new THREE.SpriteMaterial({
-        map: softTex(256),
-        color: d.color, transparent: true, opacity: d.o,
-        blending: THREE.AdditiveBlending, depthWrite: false
-      }));
-      sp.scale.set(d.s, d.s, 1); sp.position.set(...d.p);
-      scene.add(sp); return sp;
-    });
-
-    const wires = [];
-    [
-      { g:new THREE.IcosahedronGeometry(9, 1), c:0x8b5cf6, p:[-30, 7, -55], o:0.07 },
-      { g:new THREE.OctahedronGeometry(8, 0), c:0x22d3ee, p:[32, -9, -62], o:0.07 },
-      { g:new THREE.TorusKnotGeometry(6, 1.8, 40, 6), c:0xf472b6, p:[0, 28, -68], o:0.07 }
-    ].forEach(d => {
-      const m = new THREE.Mesh(d.g, new THREE.MeshBasicMaterial({ color:d.c, wireframe:true, transparent:true, opacity:d.o }));
-      m.position.set(...d.p);
-      scene.add(m); wires.push(m);
-    });
-
-    const mouse = { x:0, y:0 };
-    addEventListener('mousemove', e => { mouse.x = (e.clientX/innerWidth)*2-1; mouse.y = (e.clientY/innerHeight)*2-1; }, { passive:true });
-    addEventListener('resize', () => {
-      renderer.setSize(innerWidth, innerHeight);
-      camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix();
-    });
-    renderer.setSize(innerWidth, innerHeight);
-
-    let raf = null, running = false;
-    function start() { if (!running && !reduced) { running = true; const loop = () => { if (!running) return; raf = requestAnimationFrame(loop); tick(); }; raf = requestAnimationFrame(loop); } }
-    function stop() { running = false; if (raf) { cancelAnimationFrame(raf); raf = null; } }
-
-    const clock = new THREE.Clock();
-    function tick() {
-      const t = clock.getElapsedTime();
-      const max = document.documentElement.scrollHeight - innerHeight;
-      const scroll = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-      pts.rotation.y = t*0.02;
-      pts.rotation.x = Math.sin(t*0.05)*0.03;
-      bigPts.rotation.y = t*0.012;
-      bigPts.rotation.x = Math.sin(t*0.04)*0.02;
-      nebs.forEach((n, i) => {
-        n.position.y += Math.sin(t*0.05 + i*1.7)*0.012;
-        n.material.opacity = nebDefs[i].o*(0.8 + Math.sin(t*0.3 + i)*0.2);
-      });
-      wires.forEach((m, i) => { m.rotation.x += 0.0006; m.rotation.y += 0.0008 + i*0.0002; });
-      camera.position.x += (mouse.x*2.4 - camera.position.x)*0.02;
-      camera.position.y += (-mouse.y*1.6 - camera.position.y)*0.02;
-      camera.position.z = 2 - scroll*3.5;
-      camera.lookAt(0, 0, -10);
-      renderer.render(scene, camera);
-    }
-
-    const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
-    function sync() {
-      const light = isLight();
-      pts.material.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
-      pts.material.opacity = light ? 0.5 : 1;
-      pts.material.size = light ? 0.2 : (mobile ? 0.5 : 0.4);
-      pts.material.color = light ? new THREE.Color(0.62, 0.55, 0.82) : new THREE.Color(1, 1, 1);
-      bigPts.material.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
-      bigPts.material.opacity = light ? 0.25 : 0.6;
-      bigPts.material.size = light ? 0.6 : 1.3;
-      bigPts.material.color = light ? new THREE.Color(0.62, 0.55, 0.82) : new THREE.Color(1, 1, 1);
-      nebs.forEach((n, i) => {
-        n.material.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
-        n.material.opacity = light ? nebDefs[i].o*0.22 : nebDefs[i].o;
-      });
-      wires.forEach(m => { m.material.opacity = light ? 0.05 : 0.07; });
-    }
-    new MutationObserver(sync).observe(document.documentElement, { attributes:true, attributeFilter:['data-theme'] });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) stop(); else sync(); });
-
-    document.documentElement.classList.add('bg3d-ok');
-    sync();
-    if (reduced) tick(); else start();
-
-    window.__bg3d = {
-      render: () => renderer.render(scene, camera),
-      setClear: (hex, alpha) => renderer.setClearColor(hex, alpha)
-    };
-  } catch (err) { console.error('bg3d failed', err); }
-}
-</script>
+<script type="module">import*as THREE from"https://esm.sh/three@0.160.0";const bgCanvas=document.getElementById("bg3d");if(bgCanvas&&window.WebGLRenderingContext)try{const t=matchMedia("(prefers-reduced-motion: reduce)").matches,e=new THREE.WebGLRenderer({canvas:bgCanvas,alpha:!0,antialias:!1,powerPreference:"high-performance"});e.setPixelRatio(Math.min(devicePixelRatio,1.5));const n=new THREE.Scene,o=new THREE.PerspectiveCamera(70,innerWidth/innerHeight,.1,240);function softTex(t){const e=document.createElement("canvas");e.width=e.height=t;const n=e.getContext("2d"),o=n.createRadialGradient(t/2,t/2,0,t/2,t/2,t/2);return o.addColorStop(0,"rgba(255,255,255,1)"),o.addColorStop(.35,"rgba(200,190,255,0.7)"),o.addColorStop(1,"rgba(120,90,255,0)"),n.fillStyle=o,n.fillRect(0,0,t,t),new THREE.CanvasTexture(e)}o.position.set(0,0,2);const i=innerWidth<768,r=i?360:1400,a=new Float32Array(3*r),s=new Float32Array(3*r),c=[new THREE.Color(9133302),new THREE.Color(2282478),new THREE.Color(16020150),new THREE.Color(10980346),new THREE.Color(16777215)];for(let b=0;b<r;b++){const A=14+46*Math.random(),C=Math.random()*Math.PI*2,v=Math.acos(2*Math.random()-1);a[3*b]=A*Math.sin(v)*Math.cos(C),a[3*b+1]=A*Math.sin(v)*Math.sin(C),a[3*b+2]=A*Math.cos(v);const x=c[Math.random()*c.length|0];s[3*b]=x.r,s[3*b+1]=x.g,s[3*b+2]=x.b}const l=new THREE.BufferGeometry;l.setAttribute("position",new THREE.BufferAttribute(a,3)),l.setAttribute("color",new THREE.BufferAttribute(s,3));const d=new THREE.Points(l,new THREE.PointsMaterial({map:softTex(64),size:.4,vertexColors:!0,transparent:!0,opacity:1,depthWrite:!1,blending:THREE.AdditiveBlending,sizeAttenuation:!0}));n.add(d);const E=i?60:140,h=new Float32Array(3*E),m=new Float32Array(3*E);for(let B=0;B<E;B++){const P=16+40*Math.random(),W=Math.random()*Math.PI*2,z=Math.acos(2*Math.random()-1);h[3*B]=P*Math.sin(z)*Math.cos(W),h[3*B+1]=P*Math.sin(z)*Math.sin(W),h[3*B+2]=P*Math.cos(z);const S=c[Math.random()*c.length|0];m[3*B]=S.r,m[3*B+1]=S.g,m[3*B+2]=S.b}const p=new THREE.BufferGeometry;p.setAttribute("position",new THREE.BufferAttribute(h,3)),p.setAttribute("color",new THREE.BufferAttribute(m,3));const u=new THREE.Points(p,new THREE.PointsMaterial({map:softTex(64),size:1.3,vertexColors:!0,transparent:!0,opacity:.6,depthWrite:!1,blending:THREE.AdditiveBlending,sizeAttenuation:!0}));n.add(u);const g=[{color:9133302,s:34,o:.17,p:[-22,10,-30]},{color:2282478,s:29,o:.14,p:[26,-14,-36]},{color:16020150,s:25,o:.13,p:[8,24,-42]},{color:8141549,s:38,o:.15,p:[18,6,-54]},{color:6809849,s:20,o:.12,p:[-26,-18,-28]},{color:9133302,s:29,o:.12,p:[-12,-26,-32]},{color:16020150,s:23,o:.11,p:[30,20,-48]},{color:6514417,s:32,o:.13,p:[-40,-30,-42]}],H=g.map((t=>{const e=new THREE.Sprite(new THREE.SpriteMaterial({map:softTex(256),color:t.color,transparent:!0,opacity:t.o,blending:THREE.AdditiveBlending,depthWrite:!1}));return e.scale.set(t.s,t.s,1),e.position.set(...t.p),n.add(e),e})),T=[];[{g:new THREE.IcosahedronGeometry(9,1),c:9133302,p:[-30,7,-55],o:.07},{g:new THREE.OctahedronGeometry(8,0),c:2282478,p:[32,-9,-62],o:.07},{g:new THREE.TorusKnotGeometry(6,1.8,40,6),c:16020150,p:[0,28,-68],o:.07}].forEach((t=>{const e=new THREE.Mesh(t.g,new THREE.MeshBasicMaterial({color:t.c,wireframe:!0,transparent:!0,opacity:t.o}));e.position.set(...t.p),n.add(e),T.push(e)}));const R={x:0,y:0};addEventListener("mousemove",(t=>{R.x=t.clientX/innerWidth*2-1,R.y=t.clientY/innerHeight*2-1}),{passive:!0}),addEventListener("resize",(()=>{e.setSize(innerWidth,innerHeight),o.aspect=innerWidth/innerHeight,o.updateProjectionMatrix()})),e.setSize(innerWidth,innerHeight);let w=null,f=!1;function start(){if(!f&&!t){f=!0;const t=()=>{f&&(w=requestAnimationFrame(t),tick())};w=requestAnimationFrame(t)}}function stop(){f=!1,w&&(cancelAnimationFrame(w),w=null)}const M=new THREE.Clock;function tick(){const t=M.getElapsedTime(),i=document.documentElement.scrollHeight-innerHeight,r=i>0?Math.min(1,window.scrollY/i):0;d.rotation.y=.02*t,d.rotation.x=.03*Math.sin(.05*t),u.rotation.y=.012*t,u.rotation.x=.02*Math.sin(.04*t),H.forEach(((e,n)=>{e.position.y+=.012*Math.sin(.05*t+1.7*n),e.material.opacity=g[n].o*(.8+.2*Math.sin(.3*t+n))})),T.forEach(((t,e)=>{t.rotation.x+=6e-4,t.rotation.y+=8e-4+2e-4*e})),o.position.x+=.02*(2.4*R.x-o.position.x),o.position.y+=.02*(1.6*-R.y-o.position.y),o.position.z=2-3.5*r,o.lookAt(0,0,-10),e.render(n,o)}const y=()=>"light"===document.documentElement.getAttribute("data-theme");function sync(){const t=y();d.material.blending=t?THREE.NormalBlending:THREE.AdditiveBlending,d.material.opacity=t?.5:1,d.material.size=t?.2:i?.5:.4,d.material.color=t?new THREE.Color(.62,.55,.82):new THREE.Color(1,1,1),u.material.blending=t?THREE.NormalBlending:THREE.AdditiveBlending,u.material.opacity=t?.25:.6,u.material.size=t?.6:1.3,u.material.color=t?new THREE.Color(.62,.55,.82):new THREE.Color(1,1,1),H.forEach(((e,n)=>{e.material.blending=t?THREE.NormalBlending:THREE.AdditiveBlending,e.material.opacity=t?.22*g[n].o:g[n].o})),T.forEach((e=>{e.material.opacity=t?.05:.07}))}new MutationObserver(sync).observe(document.documentElement,{attributes:!0,attributeFilter:["data-theme"]}),document.addEventListener("visibilitychange",(()=>{document.hidden?stop():sync()})),document.documentElement.classList.add("bg3d-ok"),sync(),t?tick():start(),window.__bg3d={render:()=>e.render(n,o),setClear:(t,n)=>e.setClearColor(t,n)}}catch(F){console.error("bg3d failed",F)}</script>
 
 
 
-<script>
-(function () {
-  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const starCanvas = document.getElementById('stars');
-  const ctx = starCanvas.getContext('2d');
-  let W, H, stars = [];
-  function size() {
-    W = starCanvas.width = innerWidth; H = starCanvas.height = innerHeight;
-  }
-  size();
-  addEventListener('resize', size);
-  const N = Math.min(150, Math.floor(innerWidth / 12));
-  for (let i = 0; i < N; i++) stars.push({ x: Math.random()*innerWidth, y: Math.random()*innerHeight, r: Math.random()*1.3+0.3, a: Math.random()*Math.PI*2, sp: 0.02+Math.random()*0.06, vy: 0.05+Math.random()*0.15 });
-  if (!prefersReduced) {
-    (function draw() {
-      ctx.clearRect(0,0,W,H);
-      for (const s of stars) {
-        s.y -= s.vy; if (s.y < -2) { s.y = H + 2; s.x = Math.random()*W; }
-        s.a += s.sp;
-        ctx.globalAlpha = 0.35 + Math.sin(s.a)*0.3;
-        ctx.fillStyle = '#cfc5ff';
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2); ctx.fill();
-      }
-      ctx.globalAlpha = 1;
-      requestAnimationFrame(draw);
-    })();
-  }
-
-  const phrases = ["Obyzava | Digital Creator", "Контент-мейкер", "Разработчик", "Аналитик", "Боты · Сайты · Игры", "Создаю будущее в коде"];
-  const typingEl = document.getElementById('typingText');
-  let pi = 0, ci = 0, deleting = false;
-  (function type() {
-    const full = phrases[pi];
-    if (deleting) { ci--; } else { ci++; }
-    typingEl.textContent = full.substring(0, ci);
-    let delay = deleting ? 35 : 85;
-    if (!deleting && ci === full.length) { delay = 1900; deleting = true; }
-    else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 420; }
-    setTimeout(type, delay);
-  })();
-
-  const navLinks = document.querySelectorAll('.nav-links a');
-  const sections = [...document.querySelectorAll('section[id]')];
-  navLinks.forEach(l => l.addEventListener('click', e => {
-    e.preventDefault();
-    const t = document.getElementById(l.dataset.nav);
-    if (t) t.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' });
-  }));
-
-  const progress = document.getElementById('progress');
-  const revealEls = [...document.querySelectorAll('.reveal')];
-  revealEls.forEach((el, i) => { el.style.transitionDelay = (i % 8) * 0.05 + 's'; });
-  const cntEls = [...document.querySelectorAll('.cnt')];
-  const revealed = new Set(), counted = new Set();
-
-  function visRatio(el) {
-    const r = el.getBoundingClientRect();
-    if (r.height <= 0) return 0;
-    const top = Math.max(0, r.top), bottom = Math.min(innerHeight, r.bottom);
-    return Math.max(0, bottom - top) / r.height;
-  }
-
-  function runCounter(el) {
-    const to = +el.dataset.to, suf = el.dataset.suffix || '';
-    const t0 = performance.now(), dur = 1300;
-    (function tick(now) {
-      const p = Math.min(1, (now - t0) / dur);
-      el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3))) + suf;
-      if (p < 1) requestAnimationFrame(tick);
-    })(t0);
-  }
-
-  function poll() {
-    const de = document.documentElement;
-    const max = de.scrollHeight - innerHeight;
-    progress.style.width = (max > 0 ? Math.min(100, (scrollY / max) * 100) : 0) + '%';
-    for (const s of sections) {
-      const r = s.getBoundingClientRect();
-      if (r.top <= innerHeight * 0.45 && r.bottom >= innerHeight * 0.45) {
-        navLinks.forEach(l => l.classList.toggle('active', l.dataset.nav === s.id));
-      }
-    }
-    for (const el of revealEls) {
-      if (!revealed.has(el) && visRatio(el) >= 0.12) { revealed.add(el); el.classList.add('visible'); }
-    }
-    for (const el of cntEls) {
-      if (!counted.has(el) && visRatio(el) >= 0.6) { counted.add(el); runCounter(el); }
-    }
-  }
-
-  poll();
-  addEventListener('scroll', poll, { passive: true });
-  setInterval(poll, 500);
-  setTimeout(poll, 1200);
-  setTimeout(poll, 3000);
-
-  const GRADS = [['#8b5cf6','#22d3ee'],['#22d3ee','#f472b6'],['#f472b6','#8b5cf6'],['#8b5cf6','#f59e0b'],['#22d3ee','#34d399'],['#f472b6','#fbbf24']];
-  const projects = [
-    {name:"Obyzava V2", url:"https://obyzavav2.github.io/ObyzavaV2"},
-    {name:"Portfolio Obyzava", url:"https://obyzavav2.github.io/Portfolio-Obyzava"},
-    {name:"Dottor1k", url:"https://obyzavav2.github.io/dottor1k"},
-    {name:"Mr. Xamctep", url:"https://obyzavav2.github.io/mr.xamctep"},
-    {name:"Sbl1x", url:"https://obyzavav2.github.io/sbl1x1201"},
-    {name:"Dessert", url:"https://obyzavav2.github.io/dessert"},
-    {name:"Musca Ziv", url:"https://obyzavav2.github.io/MuscaZiv"},
-    {name:"Poof White", url:"https://obyzavav2.github.io/PoofWhiteWhite"},
-    {name:"Hebe3ehne", url:"https://obyzavav2.github.io/HEBE3EHNE.com"},
-    {name:"BioTG17", url:"https://obyzavav2.github.io/biotg17"},
-    {name:"Tor Themes", url:"https://obyzavav2.github.io/Tor_themes"},
-    {name:"4ip0tka", url:"https://obyzavav2.github.io/4ip0tka"},
-    {name:"KS ROB", url:"https://obyzavav2.github.io/KS_ROB"},
-    {name:"IP DED", url:"https://obyzavav2.github.io/IP_DED_Obyzava"},
-    {name:"Mercy FF", url:"https://obyzavav2.github.io/m3rcy_ff"},
-    {name:"Obyzava", url:"https://obyzava.github.io/Obyzava"}
-  ];
-  const grid = document.getElementById('projectGrid');
-  projects.forEach((p, i) => {
-    const g = GRADS[i % GRADS.length];
-    const el = document.createElement('a');
-    el.className = 'project reveal';
-    el.href = p.url; el.target = '_blank'; el.rel = 'noopener';
-    el.innerHTML = '<div class="strip" style="background:linear-gradient(90deg,' + g[0] + ',' + g[1] + ')"></div>' +
-      '<span class="glyph">' + p.name.charAt(0).toUpperCase() + '</span>' +
-      '<h3>' + p.name + '</h3><span class="link">Открыть ↗</span>';
-    grid.appendChild(el);
-    revealEls.push(el);
-  });
-
-  const themeBtn = document.getElementById('themeBtn');
-  if (themeBtn) {
-    themeBtn.addEventListener('click', () => {
-      const root = document.documentElement;
-      const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      const b = themeBtn.getBoundingClientRect();
-      root.style.setProperty('--wx', (b.left + b.width / 2) + 'px');
-      root.style.setProperty('--wy', (b.top + b.height / 2) + 'px');
-      const oldBg = getComputedStyle(root).getPropertyValue('--bg').trim();
-      if (prefersReduced) {
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('obyzava-theme', next); } catch(e){}
-        return;
-      }
-      const wipe = document.createElement('div');
-      wipe.className = 'wipe';
-      wipe.style.background = oldBg;
-      document.body.appendChild(wipe);
-      void wipe.offsetWidth;
-      wipe.classList.add('on');
-      setTimeout(() => {
-        root.setAttribute('data-theme', next);
-        try { localStorage.setItem('obyzava-theme', next); } catch(e){}
-        wipe.classList.remove('on');
-        wipe.classList.add('out');
-        setTimeout(() => wipe.remove(), 620);
-      }, 470);
-    });
-  }
-
-  const cursor = document.getElementById('cursor');
-  if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
-    let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
-    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }, { passive: true });
-    (function cur() {
-      cx += (mx - cx) * 0.18; cy += (my - cy) * 0.18;
-      cursor.style.left = cx + 'px'; cursor.style.top = cy + 'px';
-      requestAnimationFrame(cur);
-    })();
-    document.querySelectorAll('a, .btn, .card, .project, .stat, .step, .badge, .gem-canvas').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-  }
-})();
-</script>
+<script>!function(){const t=matchMedia("(prefers-reduced-motion: reduce)").matches,e=document.getElementById("stars"),a=e.getContext("2d");let n,o,s=[];function i(){n=e.width=innerWidth,o=e.height=innerHeight}i(),addEventListener("resize",i);const r=Math.min(150,Math.floor(innerWidth/12));for(let t=0;t<r;t++)s.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:1.3*Math.random()+.3,a:Math.random()*Math.PI*2,sp:.02+.06*Math.random(),vy:.05+.15*Math.random()});let c=null;function l(){a.clearRect(0,0,n,o);for(const t of s)t.y-=t.vy,t.y<-2&&(t.y=o+2,t.x=Math.random()*n),t.a+=t.sp,a.globalAlpha=.35+.3*Math.sin(t.a),a.fillStyle="#cfc5ff",a.beginPath(),a.arc(t.x,t.y,t.r,0,2*Math.PI),a.fill();a.globalAlpha=1,c=requestAnimationFrame(l)}function d(){c&&(cancelAnimationFrame(c),c=null)}function u(){document.documentElement.classList.contains("bg3d-ok")?d():c||t||(c=requestAnimationFrame(l))}u(),new MutationObserver(u).observe(document.documentElement,{attributes:!0,attributeFilter:["class"]}),document.addEventListener("visibilitychange",(()=>{document.hidden?d():u()}));const m=["Obyzava | Digital Creator","Контент-мейкер","Разработчик","Аналитик","Боты · Сайты · Игры","Создаю будущее в коде"],h=document.getElementById("typingText");let p=0,g=0,v=!1;!function t(){const e=m[p];v?g--:g++,h.textContent=e.substring(0,g);let a=v?35:85;v||g!==e.length?v&&0===g&&(v=!1,p=(p+1)%m.length,a=420):(a=1900,v=!0),setTimeout(t,a)}();const b=document.querySelectorAll(".nav-links a"),y=[...document.querySelectorAll("section[id]")];b.forEach((e=>e.addEventListener("click",(a=>{a.preventDefault();const n=document.getElementById(e.dataset.nav);n&&n.scrollIntoView({behavior:t?"auto":"smooth"})}))));const f=document.getElementById("progress"),E=[...document.querySelectorAll(".cnt")],L=new Set,M=new Set;function z(t){const e=t.getBoundingClientRect();if(e.height<=0)return 0;const a=Math.max(0,e.top),n=Math.min(innerHeight,e.bottom);return Math.max(0,n-a)/e.height}function x(t){const e=+t.dataset.to,a=t.dataset.suffix||"",n=performance.now();!function o(s){const i=Math.min(1,(s-n)/1300);t.textContent=Math.round(e*(1-Math.pow(1-i,3)))+a,i<1&&requestAnimationFrame(o)}(n)}function A(){const t=document.documentElement.scrollHeight-innerHeight;f.style.width=(t>0?Math.min(100,scrollY/t*100):0)+"%";for(const t of y){const e=t.getBoundingClientRect();e.top<=.45*innerHeight&&e.bottom>=.45*innerHeight&&b.forEach((e=>e.classList.toggle("active",e.dataset.nav===t.id)))}for(const t of document.querySelectorAll(".reveal"))!L.has(t)&&z(t)>=.12&&(L.add(t),t.classList.add("visible"));for(const t of E)!M.has(t)&&z(t)>=.6&&(M.add(t),x(t))}A(),addEventListener("scroll",A,{passive:!0}),setInterval(A,500),setTimeout(A,1200),setTimeout(A,3e3);const B=[["#8b5cf6","#22d3ee"],["#22d3ee","#f472b6"],["#f472b6","#8b5cf6"],["#8b5cf6","#f59e0b"],["#22d3ee","#34d399"],["#f472b6","#fbbf24"]],S=document.getElementById("projectGrid"),k={JavaScript:"#f1e05a",TypeScript:"#3178c6",Python:"#3572A5",HTML:"#e34c26",CSS:"#563d7c","C++":"#f34b7d",Java:"#b07219",Go:"#00ADD8","C#":"#178600",PHP:"#4F5D95",Kotlin:"#A97BFF",Swift:"#F05138",Shell:"#89e051",Lua:"#000080","Jupyter Notebook":"#DA5B0B",Vue:"#41b883",Dart:"#00B4AB",Rust:"#dea584"};function w(t){return String(t??"").replace(/[&<>"']/g,(t=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[t])))}function C(t){t.forEach(((t,e)=>{const a=B[e%B.length],n=document.createElement("a");n.className="project reveal",n.href=t.url,n.target="_blank",n.rel="noopener",n.innerHTML='<div class="strip" style="background:linear-gradient(90deg,'+a[0]+","+a[1]+')"></div><span class="glyph">'+w(t.name.charAt(0).toUpperCase())+"</span><h3>"+w(t.name)+"</h3>"+(t.desc?'<p class="p-desc">'+w(t.desc)+"</p>":"")+'<span class="p-meta">'+(t.lang?'<span class="p-lang"><i style="background:'+(k[t.lang]||"#8b5cf6")+'"></i>'+w(t.lang)+"</span>":"")+(t.stars?'<span class="p-stars">★ '+t.stars+"</span>":"")+'</span><span class="link">Открыть ↗</span>',S.appendChild(n)})),[...document.querySelectorAll(".reveal")].forEach(((t,e)=>{t.dataset.delayed||(t.dataset.delayed="1",t.style.transitionDelay=e%8*.05+"s")})),A()}C([{name:"Obyzava V2",url:"https://obyzavav2.github.io/ObyzavaV2"},{name:"Portfolio Obyzava",url:"https://obyzavav2.github.io/Portfolio-Obyzava"},{name:"Dottor1k",url:"https://obyzavav2.github.io/dottor1k"},{name:"Mr. Xamctep",url:"https://obyzavav2.github.io/mr.xamctep"},{name:"Sbl1x",url:"https://obyzavav2.github.io/sbl1x1201"},{name:"Dessert",url:"https://obyzavav2.github.io/dessert"},{name:"Musca Ziv",url:"https://obyzavav2.github.io/MuscaZiv"},{name:"Poof White",url:"https://obyzavav2.github.io/PoofWhiteWhite"},{name:"Hebe3ehne",url:"https://obyzavav2.github.io/HEBE3EHNE.com"},{name:"BioTG17",url:"https://obyzavav2.github.io/biotg17"},{name:"Tor Themes",url:"https://obyzavav2.github.io/Tor_themes"},{name:"4ip0tka",url:"https://obyzavav2.github.io/4ip0tka"},{name:"KS ROB",url:"https://obyzavav2.github.io/KS_ROB"},{name:"IP DED",url:"https://obyzavav2.github.io/IP_DED_Obyzava"},{name:"Mercy FF",url:"https://obyzavav2.github.io/m3rcy_ff"},{name:"Obyzava",url:"https://obyzava.github.io/Obyzava"}]),fetch("https://api.github.com/users/obyzavav2/repos?per_page=100&sort=updated").then((t=>{if(!t.ok)throw new Error("api");return t.json()})).then((t=>{if(!Array.isArray(t)||!t.length)return;const e=t.filter((t=>!t.fork&&!t.archived)).map((t=>({name:t.name,url:t.homepage||t.html_url,desc:t.description,lang:t.language,stars:t.stargazers_count||0}))).filter((t=>t.url));e.length&&(S.innerHTML="",C(e))})).catch((()=>{}));const I=document.getElementById("themeBtn");I&&I.addEventListener("click",(()=>{const e=document.documentElement,a="light"===e.getAttribute("data-theme")?"dark":"light",n=I.getBoundingClientRect();e.style.setProperty("--wx",n.left+n.width/2+"px"),e.style.setProperty("--wy",n.top+n.height/2+"px");const o=getComputedStyle(e).getPropertyValue("--bg").trim();if(t){e.setAttribute("data-theme",a);try{localStorage.setItem("obyzava-theme",a)}catch(t){}return}const s=document.createElement("div");s.className="wipe",s.style.background=o,document.body.appendChild(s),s.offsetWidth,s.classList.add("on"),setTimeout((()=>{e.setAttribute("data-theme",a);try{localStorage.setItem("obyzava-theme",a)}catch(t){}s.classList.remove("on"),s.classList.add("out"),setTimeout((()=>s.remove()),620)}),470)}));const T=document.getElementById("menuBtn"),P=document.getElementById("navMenu");if(T&&P){const t=()=>{T.classList.remove("open"),P.classList.remove("open"),T.setAttribute("aria-expanded","false"),document.body.classList.remove("menu-open")};T.addEventListener("click",(()=>{const t=P.classList.toggle("open");T.classList.toggle("open",t),T.setAttribute("aria-expanded",t?"true":"false"),document.body.classList.toggle("menu-open",t)})),P.querySelectorAll("a").forEach((e=>e.addEventListener("click",t))),addEventListener("keydown",(e=>{"Escape"===e.key&&t()}))}const H=document.getElementById("copyEmailBtn");H&&H.addEventListener("click",(()=>{const t=()=>{H.classList.add("copied"),H.textContent="✓",setTimeout((()=>{H.classList.remove("copied"),H.textContent="⧉"}),1600)};(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(H.dataset.copy):Promise.reject(new Error("nc"))).then(t).catch((()=>{(()=>{const t=document.createElement("textarea");t.value=H.dataset.copy,t.style.position="fixed",t.style.opacity="0",document.body.appendChild(t),t.select();try{document.execCommand("copy")}catch(t){}t.remove()})(),t()}))}));const D=document.getElementById("cursor");if(matchMedia("(hover:hover) and (pointer:fine)").matches){let t=innerWidth/2,e=innerHeight/2,a=t,n=e;addEventListener("mousemove",(a=>{t=a.clientX,e=a.clientY}),{passive:!0}),function o(){a+=.18*(t-a),n+=.18*(e-n),D.style.left=a+"px",D.style.top=n+"px",requestAnimationFrame(o)}(),document.querySelectorAll("a, .btn, .card, .project, .stat, .step, .badge, .gem-canvas").forEach((t=>{t.addEventListener("mouseenter",(()=>D.classList.add("hover"))),t.addEventListener("mouseleave",(()=>D.classList.remove("hover")))}))}}();</script>
+</body>
+</html>
